@@ -1,15 +1,16 @@
 package JDBC;
 
-import javax.swing.*;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 class Jdbc_Conn {
     Connection conn = null;
     ResultSet rs = null;
-    Statement stmt = null;
+//    Statement stmt = null;
     PreparedStatement pt = null;
     protected void jdbc() throws SQLException{
         try {
@@ -76,6 +77,7 @@ public class jdbc extends Jdbc_Conn {
         }
     }
 
+    //新建用户
     public int insertuser(String no,String name,String pwd) throws SQLException{
         jdbc();
 
@@ -90,28 +92,6 @@ public class jdbc extends Jdbc_Conn {
             System.out.println(res);
 
             return res;
-
-            //将查询结果放入ResultSet
-//            String select_sql = "SELECT * FROM user WHERE u_id = ? AND u_password = ?";
-//            pt = conn.prepareStatement(select_sql);
-//            pt.setString(1,name);
-//            pt.setString(2,pwd);
-//            rs = pt.executeQuery();
-
-            //将ResultSet的结果集转存为list返回
-//            ArrayList lists = new ArrayList();
-//            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
-//            int columnCount = md.getColumnCount();//得到数据集的列数
-//
-//            while (rs.next()) {//数据集不为空
-//                HashMap rowData = new HashMap();
-//                for (int i = 1; i <= columnCount; i++) {
-//                    rowData.put(md.getColumnName(i), rs.getObject(i));
-//                }
-//                lists.add(rowData);
-//            }
-//
-//            return lists;
         }
         catch (SQLException e){
             System.out.println("222"+e.getMessage());
@@ -131,9 +111,47 @@ public class jdbc extends Jdbc_Conn {
         }
     }
 
-//    public static void main(String[] args) throws SQLException{
-////        SwingUtilities.invokeLater(jdbc::selectuser);
+    //商品入库
+    public void intoproduct(String id, String name, double price, int stock,String time) throws SQLException{
+        jdbc();
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+            Date gettime = (Date) sdf.parse(time);
+
+            String select_sql = "SELECT p_name FROM product WHERE p_name = ?";
+            pt = conn.prepareStatement(select_sql);
+            pt.setString(1,name);
+
+            int res = pt.executeUpdate();
+
+            System.out.println(res);
+
+        }
+        catch (SQLException | ParseException e){
+            System.out.println("222"+e.getMessage());
+        }
+        finally {
+
+            if (rs != null){
+                rs.close();
+            }
+            if (pt != null){
+                pt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        }
+    }
+
+    public static void main(String[] args) throws SQLException, ParseException {
+//        SwingUtilities.invokeLater(jdbc::selectuser);
 //        jdbc j = new jdbc() ;
-//        j.insertuser("eeee","eeee");
-//    }
+        String time = LocalDate.now().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
+        Date gettime = (Date) sdf.parse(time);
+        System.out.println(gettime);
+//        j.intoproduct("11001001","卫生纸",9.90,50, LocalDate.now().toString());
+    }
 }
