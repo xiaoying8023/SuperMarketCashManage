@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class LoginView {
     //超市收银系统主界面————登录界面
-    private LoginView(){
+    public LoginView(){
         JFrame mainFrame = new JFrame("收银管理系统");
         JButton login = new JButton("登录");
         JLabel register = new JLabel("注册?");
@@ -100,7 +100,7 @@ public class LoginView {
                     public void run() {
                         String jobnum = jobNumber.getText();
                         String pwd = String.valueOf(password.getPassword());
-                        if (jobnum != null || pwd != null){
+                        if (jobnum != null && pwd != null){
                             JDBC.jdbc jdbc = new JDBC.jdbc();
                             try {
                                 ArrayList lists = jdbc.selectuser(jobnum,pwd);
