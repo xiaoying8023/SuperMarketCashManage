@@ -1,5 +1,5 @@
 package view;
 
 public class CashView {
-    //购物卡管理界面
+    //结账管理界面
 }
