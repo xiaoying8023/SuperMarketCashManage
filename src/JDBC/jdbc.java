@@ -2,12 +2,15 @@ package JDBC;
 
 import javax.swing.*;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 class Jdbc_Conn {
     Connection conn = null;
     ResultSet rs = null;
-    Statement stmt = null;
-//    PreparedStatement pt = null;
+    PreparedStatement pt = null;
+    //    PreparedStatement pt = null;
     protected void jdbc() throws SQLException{
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -23,26 +26,45 @@ class Jdbc_Conn {
 
 public class jdbc extends Jdbc_Conn {
     //数据库连接
-    protected void selectuser() throws SQLException{
+
+    //根据用户查询信息
+    public ArrayList selectuser(String jobNum, String pwd) throws SQLException{
         jdbc();
+
         try {
-            String sql = "select * from user";
-//            pt = conn.prepareStatement(sql);
-//            rs = pt.executeQuery(sql);
-            stmt = conn.createStatement();
-            rs = stmt.executeQuery(sql);
-            while (rs.next()){
-                System.out.println(rs.getString("u_id") + rs.getString("u_name") + rs.getString("u_password"));
+            //将查询结果放入ResultSet
+            String sql = "SELECT * FROM user WHERE u_id = ? AND u_password = ?";
+            pt = conn.prepareStatement(sql);
+            pt.setString(1,jobNum);
+            pt.setString(2,pwd);
+            rs = pt.executeQuery();
+
+            //将ResultSet的结果集转存为list返回
+            ArrayList lists = new ArrayList();
+            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
+            int columnCount = md.getColumnCount();//得到数据集的列数
+
+            while (rs.next()) {//数据集不为空
+                HashMap rowData = new HashMap();
+                for (int i = 1; i <= columnCount; i++) {
+                    rowData.put(md.getColumnName(i), rs.getObject(i));
+                }
+                lists.add(rowData);
             }
+
+            return lists;
         }
         catch (SQLException e){
             System.out.println("222"+e.getMessage());
-        }finally {
+            return null;
+        }
+        finally {
+
             if (rs != null){
                 rs.close();
             }
-            if (stmt != null){
-                stmt.close();
+            if (pt != null){
+                pt.close();
             }
             if (conn != null){
                 conn.close();
@@ -50,9 +72,9 @@ public class jdbc extends Jdbc_Conn {
         }
     }
 
-    public static void main(String[] args) throws SQLException{
-//        SwingUtilities.invokeLater(jdbc::selectuser);
-        jdbc j = new jdbc() ;
-        j.selectuser();
-    }
+//    public static void main(String[] args) throws SQLException{
+////        SwingUtilities.invokeLater(jdbc::selectuser);
+//        jdbc j = new jdbc() ;
+//        j.selectuser();
+//    }
 }
