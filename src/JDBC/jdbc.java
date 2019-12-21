@@ -37,6 +37,16 @@ public class jdbc extends Jdbc_Conn {
         }
         catch (SQLException e){
             System.out.println("222"+e.getMessage());
+        }finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (stmt != null){
+                stmt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
         }
     }
 
