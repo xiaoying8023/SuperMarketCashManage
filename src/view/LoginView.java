@@ -130,13 +130,12 @@ public class LoginView {
             @Override
             public void mouseExited(MouseEvent e) {
                 login.setCursor(Cursor.getDefaultCursor());
-
             }
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginView::new);
-    }
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(LoginView::new);
+//    }
 
 }

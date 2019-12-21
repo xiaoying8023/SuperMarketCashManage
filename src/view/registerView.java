@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class RegisterView {
+public class registerView {
     //注册页面
     public static void init(){
         //frame.dispose();
