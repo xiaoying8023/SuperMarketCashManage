@@ -22,6 +22,7 @@ class Jdbc_Conn {
 }
 
 public class jdbc extends Jdbc_Conn {
+    //数据库连接
     protected void selectuser() throws SQLException{
         jdbc();
         try {
