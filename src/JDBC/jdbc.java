@@ -153,5 +153,6 @@ public class jdbc extends Jdbc_Conn {
         Date gettime = (Date) sdf.parse(time);
         System.out.println(gettime);
 //        j.intoproduct("11001001","卫生纸",9.90,50, LocalDate.now().toString());
+        //
     }
 }
