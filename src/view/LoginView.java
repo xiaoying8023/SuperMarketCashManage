@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class loginView {
+public class LoginView {
     //超市收银系统主界面————登录界面
-    private loginView(){
+    private LoginView(){
         JFrame mainFrame = new JFrame("收银管理系统");
         JButton login = new JButton("登录");
         JLabel register = new JLabel("注册?");
@@ -39,6 +39,7 @@ public class loginView {
         center.add(findPassward);
         mainFrame.setLocation(550,300);
         mainFrame.setSize(500,400);
+        mainFrame.setResizable(false);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
         register.addMouseListener(new MouseAdapter() {
@@ -47,7 +48,7 @@ public class loginView {
                SwingUtilities.invokeLater((new Runnable() {
                    @Override
                    public void run() {
-
+                       //添加点击跳转的页面
                    }
                }));
             }
@@ -70,7 +71,7 @@ public class loginView {
                 SwingUtilities.invokeLater((new Runnable() {
                     @Override
                     public void run() {
-
+                        //添加点击跳转的页面
                     }
                 }));
             }
@@ -93,7 +94,7 @@ public class loginView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        //添加点击跳转的页面
                     }
                 });
             }
@@ -112,7 +113,7 @@ public class loginView {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(loginView::new);
+        SwingUtilities.invokeLater(LoginView::new);
     }
 
 }

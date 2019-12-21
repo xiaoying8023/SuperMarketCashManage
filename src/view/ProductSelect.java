@@ -1,5 +1,5 @@
 package view;
 
-public class productSelect {
+public class ProductSelect {
     //信息查询界面
 }

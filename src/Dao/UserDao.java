@@ -1,5 +1,5 @@
 package Dao;
 
-public class userDao {
+public class UserDao {
     //收银员表
 }

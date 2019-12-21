@@ -2,7 +2,7 @@ package team.CHL.SuperMarketCashManage;
 
 import java.awt.*;
 
-public class main {
+public class Main {
 //主程序
 
 

@@ -1,5 +1,5 @@
 package view;
 
-public class productIforamationInView {
+public class ProductIforamationInView {
     //商品信息录入模块界面
 }

@@ -1,5 +1,5 @@
 package Dao;
 
-public class cashCardDao {
+public class CashCardDao {
     //购物卡表
 }

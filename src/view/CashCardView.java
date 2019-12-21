@@ -1,5 +1,5 @@
 package view;
 
-public class cashCardView {
+public class CashCardView {
     //购物卡管理界面
 }
