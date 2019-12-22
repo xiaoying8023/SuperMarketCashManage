@@ -21,12 +21,9 @@ public class MenuView {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("文件");
-        JMenuItem back = new JMenuItem("返回主菜单");
-        back.setAccelerator(KeyStroke.getKeyStroke('Z', InputEvent.CTRL_DOWN_MASK));
-        menu.add(back);
-        JMenuItem exit = new JMenuItem("退出");
-        exit.setAccelerator(KeyStroke.getKeyStroke('Q', InputEvent.CTRL_DOWN_MASK));
-        menu.add(exit);
+        JMenuItem menuItem = new JMenuItem("退出");
+        menuItem.setAccelerator(KeyStroke.getKeyStroke('Q', InputEvent.CTRL_DOWN_MASK));
+        menu.add(menuItem);
         menuBar.add(menu);
         menuFrame.setJMenuBar(menuBar);
 
@@ -63,7 +60,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                       new ProductIforamationInView().init(menuFrame);
+
                     }
                 });
             }

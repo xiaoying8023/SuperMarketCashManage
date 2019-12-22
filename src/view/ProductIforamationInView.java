@@ -5,8 +5,7 @@ import java.awt.*;
 
 public class ProductIforamationInView {
     //商品信息录入模块界面
-    public void init(JFrame frame){
-        frame.dispose();
+    public static void init(){
         JFrame registerFrame = new JFrame("商品信息录入");
         JLabel message = new JLabel("请输入商品信息...");
         JLabel id_l = new JLabel("id:");
@@ -58,5 +57,9 @@ public class ProductIforamationInView {
         registerFrame.setVisible(true);
         registerFrame.setLocation(500,400);
 
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ProductIforamationInView::init);
     }
 }

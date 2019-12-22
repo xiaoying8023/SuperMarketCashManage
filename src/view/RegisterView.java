@@ -6,10 +6,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
-class RegisterView {
+public class RegisterView {
     //注册页面
-    public void init(JFrame frame){
-        frame.dispose();
+    public static void init(){
+//        frame.dispose();
         //定义控件
         JFrame registerFrame = new JFrame("收银员账号注册");
         JLabel message = new JLabel("请输入信息...");
@@ -65,8 +65,6 @@ class RegisterView {
                                 int res = jdbc.insertuser(no,name,pwd);
                                 if (res>0){
                                     JOptionPane.showMessageDialog(null,"新建账户成功！");
-                                    registerFrame.dispose();
-                                    new LoginView();
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"新建账户失败！");
@@ -89,8 +87,7 @@ class RegisterView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        registerFrame.dispose();
-                        new LoginView();
+
                     }
                 });
             }
@@ -98,4 +95,7 @@ class RegisterView {
 
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(RegisterView::init);
+    }
 }

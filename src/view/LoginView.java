@@ -52,7 +52,7 @@ public class LoginView {
                 SwingUtilities.invokeLater((new Runnable() {
                     @Override
                     public void run() {
-                    new RegisterView().init(mainFrame);
+
                     }
                 }));
             }
@@ -106,7 +106,6 @@ public class LoginView {
                                 ArrayList lists = jdbc.selectuser(jobnum,pwd);
                                 if (lists.size()!=0){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
-                                    new MenuView().init();
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
@@ -134,5 +133,9 @@ public class LoginView {
             }
         });
     }
+
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(LoginView::new);
+//    }
 
 }
