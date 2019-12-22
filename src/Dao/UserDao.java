@@ -1,5 +1,7 @@
 package Dao;
 
+import JDBC.Jdbc_Conn;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,9 +9,7 @@ import java.util.HashMap;
 public class UserDao extends JDBC.Jdbc_Conn{
     //收银员表
 
-    Connection conn = null;
     ResultSet rs = null;
-    //    Statement stmt = null;
     PreparedStatement pt = null;
 
     //根据用户查询信息

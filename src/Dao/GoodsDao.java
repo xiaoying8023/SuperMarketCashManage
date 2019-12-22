@@ -6,9 +6,7 @@ import java.util.HashMap;
 public class GoodsDao extends JDBC.Jdbc_Conn{
     //货物表
 
-    Connection conn = null;
     ResultSet rs = null;
-    //    Statement stmt = null;
     PreparedStatement pt = null;
 
     //商品入库
