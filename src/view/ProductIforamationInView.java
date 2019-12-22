@@ -19,8 +19,8 @@ public class ProductIforamationInView {
         JTextField price = new JPasswordField(20);
         JTextField stock = new JPasswordField(20);
         JTextField date = new JPasswordField(20);
-        JButton enter = new JButton("确定");
-        JButton cancel = new JButton("取消");
+        JButton enter = new JButton("提交");
+        JButton cancel = new JButton("返回");
         //设置控件格式
         message.setFont(new Font("宋体",Font.BOLD,15));
         message.setBounds(10,30,150,25);

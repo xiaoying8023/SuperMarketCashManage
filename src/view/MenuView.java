@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 
 public class MenuView {
     //选择所需功能
-    public void init(JFrame frame){
-        frame.dispose();
+    public static void init(){
+        //frame.dispose();
         JFrame menuFrame = new JFrame("菜单");
         JLabel photo = new JLabel("头像");
         photo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -102,5 +102,9 @@ public class MenuView {
             }
         });
     }
-    
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(MenuView::init);
+    }
+
 }
