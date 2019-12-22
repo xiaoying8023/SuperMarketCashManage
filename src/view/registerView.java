@@ -4,11 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class registerView {
     //注册页面
     public static void init(){
-        //frame.dispose();
+//        frame.dispose();
         //定义控件
         JFrame registerFrame = new JFrame("收银员账号注册");
         JLabel message = new JLabel("请输入信息...");
@@ -21,7 +22,6 @@ public class registerView {
         JButton enter = new JButton("确定");
         JButton cancel = new JButton("取消");
         //设置控件格式
-        no_t.setEditable(false);
         message.setFont(new Font("宋体",Font.BOLD,15));
         message.setBounds(10,30,100,25);
         no_l.setBounds(30,100,100,25);
@@ -49,13 +49,34 @@ public class registerView {
         registerFrame.setSize(500,450);
         registerFrame.setVisible(true);
         registerFrame.setLocation(500,400);
+        registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        String no = no_t.getText();
+                        String name = name_t.getText();
+                        String pwd = String.valueOf(passward.getPassword());
+                        if (name != null && pwd != null){
+                            JDBC.jdbc jdbc = new JDBC.jdbc();
+                            try {
+                                int res = jdbc.insertuser(no,name,pwd);
+                                if (res>0){
+                                    JOptionPane.showMessageDialog(null,"新建账户成功！");
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"新建账户失败！");
+                                }
+                            }
+                            catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null,"账号或密码不能为空！");
+                        }
                     }
                 });
             }
@@ -71,5 +92,10 @@ public class registerView {
                 });
             }
         });
+
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(RegisterView::init);
     }
 }
