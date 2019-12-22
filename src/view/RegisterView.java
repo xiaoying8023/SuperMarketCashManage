@@ -1,15 +1,17 @@
 package view;
 
+import Dao.UserDao;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
-public class registerView {
+class RegisterView {
     //注册页面
-    public static void init(){
-//        frame.dispose();
+    public void init(JFrame frame){
+        frame.dispose();
         //定义控件
         JFrame registerFrame = new JFrame("收银员账号注册");
         JLabel message = new JLabel("请输入信息...");
@@ -60,11 +62,13 @@ public class registerView {
                         String name = name_t.getText();
                         String pwd = String.valueOf(passward.getPassword());
                         if (name != null && pwd != null){
-                            JDBC.jdbc jdbc = new JDBC.jdbc();
+                            UserDao user = new UserDao();
                             try {
-                                int res = jdbc.insertuser(no,name,pwd);
+                                int res = user.insertUser(no,name,pwd);
                                 if (res>0){
                                     JOptionPane.showMessageDialog(null,"新建账户成功！");
+                                    registerFrame.dispose();
+                                    new LoginView();
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"新建账户失败！");
@@ -87,7 +91,8 @@ public class registerView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        registerFrame.dispose();
+                        new LoginView();
                     }
                 });
             }
@@ -95,7 +100,4 @@ public class registerView {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(RegisterView::init);
-    }
 }

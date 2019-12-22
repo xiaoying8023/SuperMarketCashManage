@@ -2,10 +2,13 @@ package view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ProductIforamationInView {
     //商品信息录入模块界面
     public static void init(){
+//        frame.dispose();
         JFrame registerFrame = new JFrame("商品信息录入");
         JLabel message = new JLabel("请输入商品信息...");
         JLabel id_l = new JLabel("id:");
@@ -57,6 +60,37 @@ public class ProductIforamationInView {
         registerFrame.setVisible(true);
         registerFrame.setLocation(500,400);
 
+
+        enter.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        //提交按钮点击事件
+                        String id_text = id.getText();
+                        String name_text = name.getText();
+                        String price_text = price.getText();
+                        String stock_text = stock.getText();
+                        String date_text = date.getText();
+
+
+                    }
+                });
+            }
+        });
+        cancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        //返回按钮点击事件
+                        new MenuView();
+                    }
+                });
+            }
+        });
     }
 
     public static void main(String[] args) {

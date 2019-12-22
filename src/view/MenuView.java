@@ -9,8 +9,8 @@ import java.awt.event.MouseEvent;
 
 public class MenuView {
     //选择所需功能
-    public static void init(){
-        //frame.dispose();
+    public void init(JFrame frame){
+        frame.dispose();
         JFrame menuFrame = new JFrame("菜单");
         JLabel photo = new JLabel("头像");
         photo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -21,9 +21,12 @@ public class MenuView {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("文件");
-        JMenuItem menuItem = new JMenuItem("退出");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke('Q', InputEvent.CTRL_DOWN_MASK));
-        menu.add(menuItem);
+        JMenuItem back = new JMenuItem("返回主菜单");
+        back.setAccelerator(KeyStroke.getKeyStroke('Z', InputEvent.CTRL_DOWN_MASK));
+        menu.add(back);
+        JMenuItem exit = new JMenuItem("退出");
+        exit.setAccelerator(KeyStroke.getKeyStroke('Q', InputEvent.CTRL_DOWN_MASK));
+        menu.add(exit);
         menuBar.add(menu);
         menuFrame.setJMenuBar(menuBar);
 
@@ -60,7 +63,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                       new ProductIforamationInView().init();
                     }
                 });
             }

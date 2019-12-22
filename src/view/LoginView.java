@@ -1,5 +1,6 @@
 package view;
 
+import Dao.UserDao;
 import javafx.beans.binding.ObjectBinding;
 
 import javax.swing.*;
@@ -52,7 +53,7 @@ public class LoginView {
                 SwingUtilities.invokeLater((new Runnable() {
                     @Override
                     public void run() {
-
+                    new RegisterView().init(mainFrame);
                     }
                 }));
             }
@@ -101,11 +102,12 @@ public class LoginView {
                         String jobnum = jobNumber.getText();
                         String pwd = String.valueOf(password.getPassword());
                         if (jobnum != null && pwd != null){
-                            JDBC.jdbc jdbc = new JDBC.jdbc();
+                            UserDao user = new UserDao();
                             try {
-                                ArrayList lists = jdbc.selectuser(jobnum,pwd);
+                                ArrayList lists = user.selectUser(jobnum,pwd);
                                 if (lists.size()!=0){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
+                                    new MenuView().init(mainFrame);
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
@@ -133,9 +135,5 @@ public class LoginView {
             }
         });
     }
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(LoginView::new);
-//    }
 
 }
