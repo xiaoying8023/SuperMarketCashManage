@@ -60,7 +60,11 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+<<<<<<< HEAD
 
+=======
+                       new ProductIforamationInView().init();
+>>>>>>> 548357600bc61503d29f4bb5dfc8aa15bcc57a94
                     }
                 });
             }

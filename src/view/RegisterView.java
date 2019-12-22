@@ -1,5 +1,7 @@
 package view;
 
+import Dao.UserDao;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -60,9 +62,9 @@ public class RegisterView {
                         String name = name_t.getText();
                         String pwd = String.valueOf(passward.getPassword());
                         if (name != null && pwd != null){
-                            JDBC.jdbc jdbc = new JDBC.jdbc();
+                            UserDao user = new UserDao();
                             try {
-                                int res = jdbc.insertuser(no,name,pwd);
+                                int res = user.insertUser(no,name,pwd);
                                 if (res>0){
                                     JOptionPane.showMessageDialog(null,"新建账户成功！");
                                 }

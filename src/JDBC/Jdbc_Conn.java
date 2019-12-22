@@ -3,10 +3,13 @@ package JDBC;
 import java.sql.*;
 
 public class Jdbc_Conn {
-    Connection conn = null;
+    public Connection conn = null;
     ResultSet rs = null;
 //    Statement stmt = null;
     PreparedStatement pt = null;
+//    ResultSet rs = null;
+////    Statement stmt = null;
+//    PreparedStatement pt = null;
     protected void jdbc() throws SQLException{
         try {
             Class.forName("com.mysql.jdbc.Driver");

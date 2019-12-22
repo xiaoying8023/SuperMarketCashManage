@@ -1,5 +1,6 @@
 package view;
 
+import Dao.UserDao;
 import javafx.beans.binding.ObjectBinding;
 
 import javax.swing.*;
@@ -101,9 +102,9 @@ public class LoginView {
                         String jobnum = jobNumber.getText();
                         String pwd = String.valueOf(password.getPassword());
                         if (jobnum != null && pwd != null){
-                            JDBC.jdbc jdbc = new JDBC.jdbc();
+                            UserDao user = new UserDao();
                             try {
-                                ArrayList lists = jdbc.selectuser(jobnum,pwd);
+                                ArrayList lists = user.selectUser(jobnum,pwd);
                                 if (lists.size()!=0){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
                                 }

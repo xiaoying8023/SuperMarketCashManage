@@ -14,6 +14,9 @@ public class ProductSelect {
         JLabel message = new JLabel("请输入商品ID或名称...");
         JLabel label = new JLabel("商品信息：");
         JLabel selectMessage = new JLabel();
+
+        JTable table = new JTable();
+
         JTextField id = new JTextField(20);
         JButton select = new JButton("查询");
         label.setFont(new Font("宋体",Font.BOLD,15));
@@ -61,4 +64,5 @@ public class ProductSelect {
 
 
     }
+
 }
