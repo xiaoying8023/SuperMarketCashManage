@@ -58,8 +58,4 @@ public class ProductIforamationInView {
         registerFrame.setLocation(500,400);
 
     }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductIforamationInView::init);
-    }
 }

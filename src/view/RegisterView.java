@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
-public class registerView {
+class RegisterView {
     //注册页面
     public static void init(){
 //        frame.dispose();
@@ -95,7 +95,4 @@ public class registerView {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(RegisterView::init);
-    }
 }

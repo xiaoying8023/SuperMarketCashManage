@@ -134,8 +134,5 @@ public class LoginView {
         });
     }
 
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(LoginView::new);
-//    }
 
 }
