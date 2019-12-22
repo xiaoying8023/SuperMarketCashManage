@@ -5,7 +5,8 @@ import java.awt.*;
 
 public class ProductIforamationInView {
     //商品信息录入模块界面
-    public static void init(){
+    public void init(JFrame frame){
+        frame.dispose();
         JFrame registerFrame = new JFrame("商品信息录入");
         JLabel message = new JLabel("请输入商品信息...");
         JLabel id_l = new JLabel("id:");

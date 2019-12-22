@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 class RegisterView {
     //注册页面
-    public static void init(){
-//        frame.dispose();
+    public void init(JFrame frame){
+        frame.dispose();
         //定义控件
         JFrame registerFrame = new JFrame("收银员账号注册");
         JLabel message = new JLabel("请输入信息...");
@@ -65,6 +65,8 @@ class RegisterView {
                                 int res = jdbc.insertuser(no,name,pwd);
                                 if (res>0){
                                     JOptionPane.showMessageDialog(null,"新建账户成功！");
+                                    registerFrame.dispose();
+                                    new LoginView();
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"新建账户失败！");
@@ -87,7 +89,8 @@ class RegisterView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        registerFrame.dispose();
+                        new LoginView();
                     }
                 });
             }
