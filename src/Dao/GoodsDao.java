@@ -9,7 +9,7 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
     ResultSet rs = null;
     PreparedStatement pt = null;
 
-    //商品入库
+    //商品查询
     public HashMap selectProduct(String id, String name) throws SQLException {
 
         try {
@@ -54,4 +54,6 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
             }
         }
     }
+
+    //商品
 }
