@@ -16,16 +16,4 @@ public class Jdbc_Conn {
             System.out.println("111"+e.getMessage());
         }
     }
-
-    //    public static void main(String[] args) throws SQLException, ParseException {
-////        SwingUtilities.invokeLater(jdbc::selectuser);
-//        jdbc j = new jdbc() ;
-////        String time = LocalDate.now().toString();
-////        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-////        Date gettime = (Date) sdf.parse(time);
-////        System.out.println(gettime);
-////        j.intoproduct("11001001","卫生纸",9.90,50, LocalDate.now().toString());
-//        j.selectProduct("11001001","卫生纸");
-//        //
-//    }
 }

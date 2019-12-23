@@ -12,14 +12,15 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
     //商品查询
     public HashMap selectProduct(String name) throws SQLException {
 
+        jdbc();
         try {
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
 //            Date gettime = (Date) sdf.parse(time);
 
-            String select_sql = "SELECT * FROM product WHERE p_id = ? and p_name = ?";
+            String select_sql = "SELECT * FROM product WHERE p_name = ?";
             pt = conn.prepareStatement(select_sql);
-            //pt.setString(1,id);
-            pt.setString(2,name);
+            pt.setString(1,name);
+
             rs = pt.executeQuery();
 
             ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
@@ -54,5 +55,42 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
         }
     }
 
-    //商品
+    //商品信息更新
+    public int updateProduct(String price,String stock,String time) throws SQLException {
+
+        jdbc();
+        try {
+
+            String select_sql = "UPDATE product SET p_pricce = ?,p_stock = ?,p_gettime = ?";
+            pt = conn.prepareStatement(select_sql);
+            pt.setString(1, price);
+            pt.setString(2, stock);
+            pt.setString(3,time);
+
+
+
+        }
+        catch (SQLException e){
+            System.out.println("222"+e.getMessage());
+            return -1;
+        }
+        finally {
+
+            if (rs != null){
+                rs.close();
+            }
+            if (pt != null){
+                pt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        }
+
+        return 0;
+    }
+
+    public int insertProduct(String id,String name,String price,String stock,String time){
+        return 0;
+    }
 }
