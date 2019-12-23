@@ -20,22 +20,6 @@ public class ProductSelectView {
         JLabel label = new JLabel("商品信息：");
         JLabel selectMessage = new JLabel();
 
-//        final String[] columnName = {"ID","名称","价格","库存","入库时间"};
-//        final Object[][] data = {
-//                {"1","1","1","1","1"},
-//                {"2","3","2","2","1"},
-//                {"2","3","2","2","1"},{"2","3","2","2","1"},{"2","3","2","2","1"},
-//                {"2","3","2","2","1"},
-//                {"2","3","2","2","1"},{"2","3","2","2","1"},
-//                {"2","3","2","2","1"},{"2","3","2","2","1"},{"2","3","2","2","1"},
-//                {"2","3","2","2","1"},
-//                {"2","3","2","2","1"},{"2","3","2","2","1"},
-//                {"2","3","2","2","1"},{"2","3","2","2","1"},
-//                {"2","3","2","2","1"},{"2","3","2","2","1"},{"2","3","2","2","1"},
-//                {"2","3","2","2","1"},
-//                {"2","3","2","2","1"},{"2","3","2","2","1"}
-//        };
-//        JTable table = new JTable(data,columnName);
         JTable table=new JTable();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("ID");
@@ -43,7 +27,6 @@ public class ProductSelectView {
         tableModel.addColumn("价格");
         tableModel.addColumn("库存");
         tableModel.addColumn("入库时间");
-//        tableModel.addRow();
         JScrollPane jScrollPane = new JScrollPane(table);
         jScrollPane.setBounds(40,130,400,250);
         table.setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -90,6 +73,7 @@ public class ProductSelectView {
                         try {
                             Object[] data= goodsDao.selectProduct(name);
                             if (data[0] != null){
+                                //将返回的结果添加到显示表
                                 tableModel.addRow(data);
                             }
                             else{
