@@ -102,11 +102,11 @@ public class LoginView {
                     public void run() {
                         String jobnum = jobNumber.getText();
                         String pwd = String.valueOf(password.getPassword());
-                        if (jobnum != null && pwd != null){
+                        if (!jobnum.equals("") && !pwd.equals("")){
                             UserDao user = new UserDao();
                             try {
-                                HashMap result = user.selectUser(jobnum,pwd);
-                                if (result != null){
+                                Object[] result = user.selectUser(jobnum,pwd);
+                                if (result[0] != null){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
                                     new MenuView().init();
                                 }

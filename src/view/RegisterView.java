@@ -97,7 +97,4 @@ public class RegisterView {
 
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(RegisterView::init);
-    }
 }
