@@ -20,7 +20,7 @@ public class ProductSelectView {
         JLabel label = new JLabel("商品信息：");
         JLabel selectMessage = new JLabel();
 
-        final String[] columnName = {"ID","名称","价格","库存","入库时间"};
+//        final String[] columnName = {"ID","名称","价格","库存","入库时间"};
 //        final Object[][] data = {
 //                {"1","1","1","1","1"},
 //                {"2","3","2","2","1"},
@@ -89,7 +89,13 @@ public class ProductSelectView {
                         GoodsDao goodsDao = new GoodsDao();
                         try {
                             Object[] data= goodsDao.selectProduct(name);
-                            tableModel.addRow(data);
+                            if (data[0] != null){
+                                tableModel.addRow(data);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null,"该商品不存在！");
+                            }
+
 
                         } catch (SQLException ex) {
                             ex.printStackTrace();
