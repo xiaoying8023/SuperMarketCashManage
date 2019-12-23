@@ -14,7 +14,7 @@ public class UserDao extends JDBC.Jdbc_Conn{
 
     //根据用户查询信息
     public ArrayList selectUser(String jobNum, String pwd) throws SQLException {
-
+        jdbc();
         try {
             //将查询结果放入ResultSet
             String sql = "SELECT * FROM user WHERE u_id = ? AND u_password = ?";

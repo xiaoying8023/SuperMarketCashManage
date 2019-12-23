@@ -9,10 +9,13 @@ import java.awt.event.MouseEvent;
 
 public class MenuView {
     //选择所需功能
-    public static void init(){
+    public void init(){
         //frame.dispose();
         JFrame menuFrame = new JFrame("菜单");
-        JLabel photo = new JLabel("头像");
+        ImageIcon imageIcon = new ImageIcon("photo.jpg");
+        //Image imag = imageIcon.getImage();
+        JLabel photo = new JLabel();
+        photo.setIcon(imageIcon);
         photo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         JTextArea user = new JTextArea("\n工号：\n\n姓名：\n",5,20);
         user.setFont(new Font("宋体",Font.BOLD,20));
@@ -60,11 +63,9 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-<<<<<<< HEAD
-
-=======
+                        menuFrame.dispose();
                        new ProductIforamationInView().init();
->>>>>>> 548357600bc61503d29f4bb5dfc8aa15bcc57a94
+
                     }
                 });
             }
@@ -75,7 +76,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        menuFrame.dispose();
                     }
                 });
             }
@@ -86,7 +87,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        menuFrame.dispose();
                     }
                 });
             }
@@ -97,6 +98,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        menuFrame.dispose();
 
                     }
                 });
@@ -104,8 +106,5 @@ public class MenuView {
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(MenuView::init);
-    }
 
 }

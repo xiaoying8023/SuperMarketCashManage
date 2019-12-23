@@ -10,7 +10,7 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
     PreparedStatement pt = null;
 
     //商品查询
-    public HashMap selectProduct(String id, String name) throws SQLException {
+    public HashMap selectProduct(String name) throws SQLException {
 
         try {
 //            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
@@ -18,9 +18,8 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
 
             String select_sql = "SELECT * FROM product WHERE p_id = ? and p_name = ?";
             pt = conn.prepareStatement(select_sql);
-            pt.setString(1,id);
+            //pt.setString(1,id);
             pt.setString(2,name);
-
             rs = pt.executeQuery();
 
             ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();

@@ -8,11 +8,9 @@ import java.awt.event.MouseEvent;
 public class ProductIforamationInView {
     //商品信息录入模块界面
     public static void init(){
-<<<<<<< HEAD
-=======
 //        frame.dispose();
->>>>>>> 548357600bc61503d29f4bb5dfc8aa15bcc57a94
-        JFrame registerFrame = new JFrame("商品信息录入");
+
+        JFrame productFrame = new JFrame("商品信息录入");
         JLabel message = new JLabel("请输入商品信息...");
         JLabel id_l = new JLabel("id:");
         JLabel name_l = new JLabel("商品名称:");
@@ -24,8 +22,8 @@ public class ProductIforamationInView {
         JTextField price = new JPasswordField(20);
         JTextField stock = new JPasswordField(20);
         JTextField date = new JPasswordField(20);
-        JButton enter = new JButton("提交");
-        JButton cancel = new JButton("返回");
+        JButton submit = new JButton("提交");
+        JButton back = new JButton("返回");
         //设置控件格式
         message.setFont(new Font("宋体",Font.BOLD,15));
         message.setBounds(10,30,150,25);
@@ -39,12 +37,12 @@ public class ProductIforamationInView {
         stock.setBounds(80,190,200,25);
         date_l.setBounds(20,220,100,25);
         date.setBounds(80,220,200,25);
-        enter.setBounds(100,280,100,22);
-        cancel.setBounds(230,280,100,22);
+        submit.setBounds(100,280,100,22);
+        back.setBounds(230,280,100,22);
         //添加控件
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        registerFrame.add(panel);
+        productFrame.add(panel);
         panel.add(message);
         panel.add(id_l);
         panel.add(id);
@@ -56,15 +54,15 @@ public class ProductIforamationInView {
         panel.add(stock);
         panel.add(date_l);
         panel.add(date);
-        panel.add(enter);
-        panel.add(cancel);
-        registerFrame.setResizable(false);
-        registerFrame.setSize(500,450);
-        registerFrame.setVisible(true);
-        registerFrame.setLocation(500,400);
+        panel.add(submit);
+        panel.add(back);
+        productFrame.setResizable(false);
+        productFrame.setSize(500,450);
+        productFrame.setVisible(true);
+        productFrame.setLocation(500,400);
 
 
-        enter.addMouseListener(new MouseAdapter() {
+        submit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -82,25 +80,20 @@ public class ProductIforamationInView {
                 });
             }
         });
-        cancel.addMouseListener(new MouseAdapter() {
+        back.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         //返回按钮点击事件
-                        new MenuView();
+                        productFrame.dispose();
+                        new MenuView().init();
                     }
                 });
             }
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductIforamationInView::init);
-    }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductIforamationInView::init);
-    }
 }
