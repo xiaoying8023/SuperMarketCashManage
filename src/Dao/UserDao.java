@@ -13,7 +13,7 @@ public class UserDao extends JDBC.Jdbc_Conn{
     PreparedStatement pt = null;
 
     //根据用户查询信息
-    public HashMap selectUser(String jobNum, String pwd) throws SQLException {
+    public Object[] selectUser(String jobNum, String pwd) throws SQLException {
 
         jdbc();
         try {
@@ -24,23 +24,32 @@ public class UserDao extends JDBC.Jdbc_Conn{
             pt.setString(2,pwd);
             rs = pt.executeQuery();
 
-            while (rs.next()){
-                System.out.println(rs.getString("u_name"));
-            }
+//            while (rs.next()){
+//                System.out.println(rs.getString("u_name"));
+//            }
 
             //将ResultSet的结果集转存为HashMap返回
-            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
-            int columnCount = md.getColumnCount();//得到数据集的列数
-            HashMap rowData = new HashMap();
+//            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
+//            int columnCount = md.getColumnCount();//得到数据集的列数
+//            HashMap rowData = new HashMap();
+//
+//            while (rs.next()) {//数据集不为空
+//
+//                for (int i = 1; i <= columnCount; i++) {
+//                    rowData.put(md.getColumnName(i), rs.getObject(i));
+//                }
+//            }
 
-            while (rs.next()) {//数据集不为空
+            //将查询结果集转换为Object[]返回
+            Object[] obj = new Object[3];
 
-                for (int i = 1; i <= columnCount; i++) {
-                    rowData.put(md.getColumnName(i), rs.getObject(i));
-                }
+            while (rs.next()){
+                obj[0] = rs.getString("u_id");
+                obj[1] = rs.getString("u_name");
+                obj[2] = rs.getString("u_password");
             }
 
-            return rowData;
+            return obj;
         }
         catch (SQLException e){
             System.out.println("222"+e.getMessage());

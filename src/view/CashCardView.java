@@ -1,8 +1,12 @@
 package view;
 
+import Dao.CashCardDao;
+import Util.SwingUtil;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -69,14 +73,61 @@ public class CashCardView {
         //查询按钮事件
         cashcardinquirebutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("查询");
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        String cashid = cashcardIDtextfield.getText();
+                        if (!cashid.equals("")){
+                            CashCardDao cc = new CashCardDao();
+                            try {
+                                Object[] obj = cc.selectCashCcard(cashid);
+                                if (obj[0] != null){
+                                    tableModel.addRow(obj);
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"该账户不存在！");
+                                }
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                            System.out.println("111");
+
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"输入卡号不能为空！");
+                        }
+                    }
+                });
             }
         });
         //充值按钮事件
         cashcardrechargebutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("充值");
-                JOptionPane.showInputDialog("请输入金额：");
+                //获取充值金额
+                String addMoneyStr = JOptionPane.showInputDialog("请输入要充值的金额");
+
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        String cashcard = (String) cashcardtable.getValueAt(cashcardtable.getSelectedRow(),0);
+                        Double money = Double.parseDouble((String) cashcardtable.getValueAt(cashcardtable.getSelectedRow(),2));
+
+//                        if (!addMoney.equals("")){
+//                            Double addMoney = Double.parseDouble(addMoneyStr);
+//
+//                        }
+//                        else{
+//                            JOptionPane.showMessageDialog(null,"输入金额不能为空！");
+//                        }
+
+
+
+
+
+
+
+                    }
+                });
             }
         });
         //办理按钮事件

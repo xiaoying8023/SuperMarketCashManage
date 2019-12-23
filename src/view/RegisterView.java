@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class RegisterView {
     //注册页面
-    public void init(){
+    public static void init(){
 //        frame.dispose();
         //定义控件
         JFrame registerFrame = new JFrame("收银员账号注册");
@@ -96,4 +96,5 @@ public class RegisterView {
         });
 
     }
+
 }

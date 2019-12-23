@@ -21,6 +21,7 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
 
             rs = pt.executeQuery();
 
+
             //将查询结果转换为Object数组
             Object[] result  = new Object[5];
             while (rs.next()){

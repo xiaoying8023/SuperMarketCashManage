@@ -80,14 +80,15 @@ public class ProductIforamationInView {
                         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                         String time = date.format(fmt);
 
-                        if (id_text != null && name_text != null && price_text != null && stock_text != null){
+                        if (!id_text.equals("") && !name_text.equals("") && !price_text.equals("") && !stock_text.equals("")){
                             GoodsDao good = new GoodsDao();
                             try {
                                 Object[] selectResult = good.selectProduct(name_text);
                                 //如果商品存在，更新现有商品信息；如果商品不存在，添加新的商品信息
-                                if (selectResult[0] == null){
+                                if (selectResult[0] != null){
                                     int result = good.updateProduct(name_text,price_text,stock_text,time);
-                                    if (result != 0){
+                                    System.out.println(result);
+                                    if (result != -1){
                                         JOptionPane.showMessageDialog(null,"商品信息更新成功！");
                                     }
                                     else{
@@ -97,7 +98,8 @@ public class ProductIforamationInView {
                                 }
                                 else{
                                     int result = good.insertProduct(id_text,name_text,price_text,stock_text,time);
-                                    if (result != 0){
+                                    System.out.println(result);
+                                    if (result != -1){
                                         JOptionPane.showMessageDialog(null,"已添加新商品信息！");
                                     }
                                     else {
