@@ -1,5 +1,8 @@
 package view;
 
+import Util.SwingUtil;
+import com.mysql.jdbc.Util;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -12,11 +15,18 @@ public class MenuView {
     public void init(){
         //frame.dispose();
         JFrame menuFrame = new JFrame("菜单");
-        ImageIcon imageIcon = new ImageIcon("photo.jpg");
-        //Image imag = imageIcon.getImage();
-        JLabel photo = new JLabel();
-        photo.setIcon(imageIcon);
+
+        //处理头像
+        ImageIcon imageIcon = new ImageIcon("C:\\Users\\Administrator\\IdeaProjects\\SuperMarketCashManage\\src\\photo.jpg");
+        Image image =imageIcon.getImage();
+        SwingUtil swing = new SwingUtil();
+        imageIcon=swing.createAutoAdjustIcon(image,true);
+        JLabel photo = new JLabel(imageIcon,JLabel.CENTER);
         photo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+
+
+
         JTextArea user = new JTextArea("\n工号：\n\n姓名：\n",5,20);
         user.setFont(new Font("宋体",Font.BOLD,20));
         user.setEditable(false);
