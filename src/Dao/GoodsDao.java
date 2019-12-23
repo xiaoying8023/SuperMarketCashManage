@@ -56,17 +56,21 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
     }
 
     //商品信息更新
-    public int updateProduct(String price,String stock,String time) throws SQLException {
+    public int updateProduct(String name,String price,String stock,String time) throws SQLException {
 
         jdbc();
         try {
 
-            String select_sql = "UPDATE product SET p_pricce = ?,p_stock = ?,p_gettime = ?";
+            String select_sql = "UPDATE product SET p_price = ?,p_stock = ?,p_gettime = ? WHERE p_name = ?";
             pt = conn.prepareStatement(select_sql);
             pt.setString(1, price);
             pt.setString(2, stock);
             pt.setString(3,time);
+            pt.setString(4,name);
 
+            int result = pt.executeUpdate();
+
+            return result;
 
 
         }
@@ -86,11 +90,42 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
                 conn.close();
             }
         }
-
-        return 0;
     }
 
-    public int insertProduct(String id,String name,String price,String stock,String time){
-        return 0;
+    //新商品信息插入
+    public int insertProduct(String id,String name,String price,String stock,String time) throws SQLException {
+
+        jdbc();
+        try {
+
+            String select_sql = "INSERT INTO product(p_id,p_name,p_price,p_stock,p_gettime) VALUES (?,?,?,?,?)";
+            pt = conn.prepareStatement(select_sql);
+            pt.setString(1, id);
+            pt.setString(2, name);
+            pt.setString(3,price);
+            pt.setString(4,stock);
+            pt.setString(5,time);
+
+            int result = pt.executeUpdate();
+
+            return result;
+
+        }
+        catch (SQLException e){
+            System.out.println("222"+e.getMessage());
+            return -1;
+        }
+        finally {
+
+            if (rs != null){
+                rs.close();
+            }
+            if (pt != null){
+                pt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        }
     }
 }
