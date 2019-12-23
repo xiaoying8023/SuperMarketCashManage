@@ -17,21 +17,18 @@ public class ProductIforamationInView {
     //商品信息录入模块界面
     public static void init(){
 //        frame.dispose();
-
-        JFrame productFrame = new JFrame("商品信息录入");
+        JFrame registerFrame = new JFrame("商品信息录入");
         JLabel message = new JLabel("请输入商品信息...");
         JLabel id_l = new JLabel("id:");
         JLabel name_l = new JLabel("商品名称:");
         JLabel price_l = new JLabel("价格:");
         JLabel stock_l = new JLabel("入库数量:");
-        JLabel date_l = new JLabel("入库时间:");
         JTextField id = new JTextField(20);
         JTextField name = new JTextField(20);
-        JTextField price = new JPasswordField(20);
-        JTextField stock = new JPasswordField(20);
-        JTextField date = new JPasswordField(20);
-        JButton submit = new JButton("提交");
-        JButton back = new JButton("返回");
+        JTextField price = new JTextField(20);
+        JTextField stock = new JTextField(20);
+        JButton enter = new JButton("确定");
+        JButton cancel = new JButton("取消");
         //设置控件格式
         message.setFont(new Font("宋体",Font.BOLD,15));
         message.setBounds(10,30,150,25);
@@ -43,14 +40,12 @@ public class ProductIforamationInView {
         price.setBounds(80,160,200,25);
         stock_l.setBounds(20,190,100,25);
         stock.setBounds(80,190,200,25);
-        date_l.setBounds(20,220,100,25);
-        date.setBounds(80,220,200,25);
-        submit.setBounds(100,280,100,22);
-        back.setBounds(230,280,100,22);
+        enter.setBounds(100,280,100,22);
+        cancel.setBounds(230,280,100,22);
         //添加控件
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        productFrame.add(panel);
+        registerFrame.add(panel);
         panel.add(message);
         panel.add(id_l);
         panel.add(id);
@@ -60,17 +55,15 @@ public class ProductIforamationInView {
         panel.add(price);
         panel.add(stock_l);
         panel.add(stock);
-        panel.add(date_l);
-        panel.add(date);
-        panel.add(submit);
-        panel.add(back);
-        productFrame.setResizable(false);
-        productFrame.setSize(500,450);
-        productFrame.setVisible(true);
-        productFrame.setLocation(500,400);
+        panel.add(enter);
+        panel.add(cancel);
+        registerFrame.setResizable(false);
+        registerFrame.setSize(500,450);
+        registerFrame.setVisible(true);
+        registerFrame.setLocation(500,400);
 
 
-        submit.addMouseListener(new MouseAdapter() {
+        enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
@@ -87,19 +80,31 @@ public class ProductIforamationInView {
                         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                         String time = date.format(fmt);
 
-                        if (true/*id_text != null && name_text != null && price_text != null && stock_text != null*/){
+                        if (id_text != null && name_text != null && price_text != null && stock_text != null){
                             GoodsDao good = new GoodsDao();
                             try {
-                                HashMap selectResult = good.selectProduct(name_text);
+                                Object[] selectResult = good.selectProduct(name_text);
                                 //如果商品存在，更新现有商品信息；如果商品不存在，添加新的商品信息
-                                if (selectResult != null){
-                                    int result = good.updateProduct(price_text,stock_text,time);
+                                if (selectResult[0] == null){
+                                    int result = good.updateProduct(name_text,price_text,stock_text,time);
+                                    if (result != 0){
+                                        JOptionPane.showMessageDialog(null,"商品信息更新成功！");
+                                    }
+                                    else{
+                                        JOptionPane.showMessageDialog(null,"商品信息更新失败！");
+                                    }
+
                                 }
                                 else{
                                     int result = good.insertProduct(id_text,name_text,price_text,stock_text,time);
-                                }
+                                    if (result != 0){
+                                        JOptionPane.showMessageDialog(null,"已添加新商品信息！");
+                                    }
+                                    else {
+                                        JOptionPane.showMessageDialog(null,"添加新商品失败！");
+                                    }
 
-                                System.out.println(selectResult);
+                                }
 
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
@@ -110,27 +115,26 @@ public class ProductIforamationInView {
                             JOptionPane.showMessageDialog(null,"输入信息不能为空！");
                         }
 
-                        System.out.println(date);
-
 
                     }
                 });
             }
         });
-        back.addMouseListener(new MouseAdapter() {
+        cancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
                         //返回按钮点击事件
-                        productFrame.dispose();
-                        new MenuView().init();
+                        new MenuView();
                     }
                 });
             }
         });
     }
 
-
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ProductIforamationInView::init);
+    }
 }

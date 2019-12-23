@@ -24,6 +24,10 @@ public class UserDao extends JDBC.Jdbc_Conn{
             pt.setString(2,pwd);
             rs = pt.executeQuery();
 
+            while (rs.next()){
+                System.out.println(rs.getString("u_name"));
+            }
+
             //将ResultSet的结果集转存为HashMap返回
             ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
             int columnCount = md.getColumnCount();//得到数据集的列数

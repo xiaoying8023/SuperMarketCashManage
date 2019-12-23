@@ -10,12 +10,10 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
     PreparedStatement pt = null;
 
     //商品查询
-    public HashMap selectProduct(String name) throws SQLException {
+    public Object[] selectProduct(String name) throws SQLException {
 
         jdbc();
         try {
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-//            Date gettime = (Date) sdf.parse(time);
 
             String select_sql = "SELECT * FROM product WHERE p_name = ?";
             pt = conn.prepareStatement(select_sql);
@@ -23,18 +21,29 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
 
             rs = pt.executeQuery();
 
-            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
-            int columnCount = md.getColumnCount();//得到数据集的列数
+            //将查询结果转换为Object数组
+            Object[] result  = new Object[5];
+            while (rs.next()){
 
-            HashMap rowData = new HashMap();
-
-            while (rs.next()) {//数据集不为空
-                for (int i = 1; i <= columnCount; i++) {
-                    rowData.put(md.getColumnName(i), rs.getObject(i));
-                }
+                result[0] = rs.getString("p_id");
+                result[1] = rs.getString("p_name");
+                result[2] = rs.getString("p_price");
+                result[3] = rs.getString("p_stock");
+                result[4] = rs.getString("p_gettime");
             }
 
-            return rowData;
+//            转换为HashMap
+//            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
+//            int columnCount = md.getColumnCount();//得到数据集的列数
+//
+//            HashMap rowData = new HashMap();
+//
+//            while (rs.next()) {//数据集不为空
+//                for (int i = 1; i <= columnCount; i++) {
+//                    rowData.put(md.getColumnName(i), rs.getObject(i));
+//                }
+//            }
+            return result;
 
         }
         catch (SQLException e){
@@ -56,17 +65,21 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
     }
 
     //商品信息更新
-    public int updateProduct(String price,String stock,String time) throws SQLException {
+    public int updateProduct(String name,String price,String stock,String time) throws SQLException {
 
         jdbc();
         try {
 
-            String select_sql = "UPDATE product SET p_pricce = ?,p_stock = ?,p_gettime = ?";
+            String select_sql = "UPDATE product SET p_price = ?,p_stock = ?,p_gettime = ? WHERE p_name = ?";
             pt = conn.prepareStatement(select_sql);
             pt.setString(1, price);
             pt.setString(2, stock);
             pt.setString(3,time);
+            pt.setString(4,name);
 
+            int result = pt.executeUpdate();
+
+            return result;
 
 
         }
@@ -86,11 +99,42 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
                 conn.close();
             }
         }
-
-        return 0;
     }
 
-    public int insertProduct(String id,String name,String price,String stock,String time){
-        return 0;
+    //新商品信息插入
+    public int insertProduct(String id,String name,String price,String stock,String time) throws SQLException {
+
+        jdbc();
+        try {
+
+            String select_sql = "INSERT INTO product(p_id,p_name,p_price,p_stock,p_gettime) VALUES (?,?,?,?,?)";
+            pt = conn.prepareStatement(select_sql);
+            pt.setString(1, id);
+            pt.setString(2, name);
+            pt.setString(3,price);
+            pt.setString(4,stock);
+            pt.setString(5,time);
+
+            int result = pt.executeUpdate();
+
+            return result;
+
+        }
+        catch (SQLException e){
+            System.out.println("222"+e.getMessage());
+            return -1;
+        }
+        finally {
+
+            if (rs != null){
+                rs.close();
+            }
+            if (pt != null){
+                pt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        }
     }
 }

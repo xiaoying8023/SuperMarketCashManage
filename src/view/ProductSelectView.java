@@ -14,42 +14,22 @@ import java.util.Map;
 
 public class ProductSelectView {
     //信息查询界面
-    public static void init(){
+    public void init(){
         JFrame registerFrame = new JFrame("商品信息查询");
         JLabel message = new JLabel("请输入商品名称...");
         JLabel label = new JLabel("商品信息：");
         JLabel selectMessage = new JLabel();
 
-        final String[] columnName = {"ID","名称","价格","库存","入库时间"};
-        final Object[][] data = {
-                {"1","1","1","1","1"},
-                {"2","3","2","2","1"},
-                {"2","3","2","2","1"},{"2","3","2","2","1"},{"2","3","2","2","1"},
-                {"2","3","2","2","1"},
-                {"2","3","2","2","1"},{"2","3","2","2","1"},
-                {"2","3","2","2","1"},{"2","3","2","2","1"},{"2","3","2","2","1"},
-                {"2","3","2","2","1"},
-                {"2","3","2","2","1"},{"2","3","2","2","1"},
-                {"2","3","2","2","1"},{"2","3","2","2","1"},
-                {"2","3","2","2","1"},{"2","3","2","2","1"},{"2","3","2","2","1"},
-                {"2","3","2","2","1"},
-                {"2","3","2","2","1"},{"2","3","2","2","1"}
-        };
-        JTable table = new JTable(data,columnName);
-//        JTable table=new JTable();
-//        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-//        tableModel.addColumn("ID");
-//        tableModel.addColumn("名称");
-//        tableModel.addColumn("价格");
-//        tableModel.addColumn("库存");
-//        tableModel.addColumn("入库时间");
-//        tableModel.addRow(data1);
+        JTable table=new JTable();
+        DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
+        tableModel.addColumn("ID");
+        tableModel.addColumn("名称");
+        tableModel.addColumn("价格");
+        tableModel.addColumn("库存");
+        tableModel.addColumn("入库时间");
         JScrollPane jScrollPane = new JScrollPane(table);
         jScrollPane.setBounds(40,130,400,250);
         table.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        System.out.println(table.getRowCount());
-        System.out.println(table.getValueAt(2,2));
-        System.out.println();
 
         JTextField id = new JTextField(20);
         JButton select = new JButton("查询");
@@ -90,12 +70,20 @@ public class ProductSelectView {
                         //点击查询
                         String name = id.getText();
                         GoodsDao goodsDao = new GoodsDao();
-                        Map map = new HashMap();
-//                        try {
-//                            map=goodsDao.selectProduct(name);
-//                        } catch (SQLException ex) {
-//                            ex.printStackTrace();
-//                        }
+                        try {
+                            Object[] data= goodsDao.selectProduct(name);
+                            if (data[0] != null){
+                                //将返回的结果添加到显示表
+                                tableModel.addRow(data);
+                            }
+                            else{
+                                JOptionPane.showMessageDialog(null,"该商品不存在！");
+                            }
+
+
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 });
             }
@@ -105,10 +93,6 @@ public class ProductSelectView {
 
 
 
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductSelectView::init);
     }
 
 }
