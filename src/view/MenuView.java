@@ -1,5 +1,8 @@
 package view;
 
+import Util.SwingUtil;
+import com.mysql.jdbc.Util;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -9,11 +12,21 @@ import java.awt.event.MouseEvent;
 
 public class MenuView {
     //选择所需功能
-    public static void init(){
+    public void init(){
         //frame.dispose();
         JFrame menuFrame = new JFrame("菜单");
-        JLabel photo = new JLabel("头像");
+
+        //处理头像
+        ImageIcon imageIcon = new ImageIcon("F:\\SuperMarketCashManage\\src\\photo.jpg");
+        Image image =imageIcon.getImage();
+        SwingUtil swing = new SwingUtil();
+        imageIcon=swing.createAutoAdjustIcon(image,true);
+        JLabel photo = new JLabel(imageIcon,JLabel.CENTER);
         photo.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+
+
+
         JTextArea user = new JTextArea("\n工号：\n\n姓名：\n",5,20);
         user.setFont(new Font("宋体",Font.BOLD,20));
         user.setEditable(false);
@@ -60,6 +73,8 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        menuFrame.dispose();
+                       new ProductIforamationInView().init();
 
                     }
                 });
@@ -71,7 +86,8 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        menuFrame.dispose();
+                        new ProductSelectView().init();
                     }
                 });
             }
@@ -82,7 +98,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        menuFrame.dispose();
                     }
                 });
             }
@@ -93,11 +109,13 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+                        menuFrame.dispose();
 
                     }
                 });
             }
         });
     }
-    
+
+
 }

@@ -1,5 +1,6 @@
 package view;
 
+import Dao.UserDao;
 import javafx.beans.binding.ObjectBinding;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoginView {
     //超市收银系统主界面————登录界面
@@ -17,7 +19,7 @@ public class LoginView {
         JButton login = new JButton("登录");
         JLabel register = new JLabel("注册?");
         JLabel findPassward = new JLabel("修改密码");
-        JTextField jobNumber = new JTextField("123456",20);
+        JTextField jobNumber = new JTextField(20);
         JPasswordField password = new JPasswordField(20);
         JLabel jobNumber_l = new JLabel("工号:");
         JLabel passward_l = new JLabel("密码：");
@@ -52,7 +54,7 @@ public class LoginView {
                 SwingUtilities.invokeLater((new Runnable() {
                     @Override
                     public void run() {
-
+                    new RegisterView().init();
                     }
                 }));
             }
@@ -100,12 +102,13 @@ public class LoginView {
                     public void run() {
                         String jobnum = jobNumber.getText();
                         String pwd = String.valueOf(password.getPassword());
-                        if (jobnum != null && pwd != null){
-                            JDBC.jdbc jdbc = new JDBC.jdbc();
+                        if (!jobnum.equals("") && !pwd.equals("")){
+                            UserDao user = new UserDao();
                             try {
-                                ArrayList lists = jdbc.selectuser(jobnum,pwd);
-                                if (lists.size()!=0){
+                                Object[] result = user.selectUser(jobnum,pwd);
+                                if (result[0] != null){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
+                                    new MenuView().init();
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
@@ -134,5 +137,7 @@ public class LoginView {
         });
     }
 
-
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(LoginView::new);
+    }
 }
