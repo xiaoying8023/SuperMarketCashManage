@@ -83,10 +83,9 @@ public class ProductIforamationInView {
                         if (id_text != null && name_text != null && price_text != null && stock_text != null){
                             GoodsDao good = new GoodsDao();
                             try {
-                                HashMap selectResult = good.selectProduct(name_text);
-                                System.out.println(selectResult);
+                                Object[] selectResult = good.selectProduct(name_text);
                                 //如果商品存在，更新现有商品信息；如果商品不存在，添加新的商品信息
-                                if (selectResult.size() != 0){
+                                if (selectResult[0] == null){
                                     int result = good.updateProduct(name_text,price_text,stock_text,time);
                                     if (result != 0){
                                         JOptionPane.showMessageDialog(null,"商品信息更新成功！");

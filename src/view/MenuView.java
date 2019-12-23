@@ -17,7 +17,7 @@ public class MenuView {
         JFrame menuFrame = new JFrame("菜单");
 
         //处理头像
-        ImageIcon imageIcon = new ImageIcon("C:\\Users\\Administrator\\IdeaProjects\\SuperMarketCashManage\\src\\photo.jpg");
+        ImageIcon imageIcon = new ImageIcon("F:\\SuperMarketCashManage\\src\\photo.jpg");
         Image image =imageIcon.getImage();
         SwingUtil swing = new SwingUtil();
         imageIcon=swing.createAutoAdjustIcon(image,true);
@@ -87,6 +87,7 @@ public class MenuView {
                     @Override
                     public void run() {
                         menuFrame.dispose();
+                        new ProductSelectView().init();
                     }
                 });
             }

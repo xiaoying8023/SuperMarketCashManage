@@ -10,12 +10,10 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
     PreparedStatement pt = null;
 
     //商品查询
-    public HashMap selectProduct(String name) throws SQLException {
+    public Object[] selectProduct(String name) throws SQLException {
 
         jdbc();
         try {
-//            SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd");
-//            Date gettime = (Date) sdf.parse(time);
 
             String select_sql = "SELECT * FROM product WHERE p_name = ?";
             pt = conn.prepareStatement(select_sql);
@@ -23,18 +21,28 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
 
             rs = pt.executeQuery();
 
-            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
-            int columnCount = md.getColumnCount();//得到数据集的列数
-
-            HashMap rowData = new HashMap();
-
-            while (rs.next()) {//数据集不为空
-                for (int i = 1; i <= columnCount; i++) {
-                    rowData.put(md.getColumnName(i), rs.getObject(i));
-                }
+            //将查询结果转换为Object数组
+            Object[] result  = new Object[5];
+            while (rs.next()){
+                result[0] = rs.getString("p_id");
+                result[1] = rs.getString("p_name");
+                result[2] = rs.getString("p_price");
+                result[3] = rs.getString("p_stock");
+                result[4] = rs.getString("p_gettime");
             }
 
-            return rowData;
+//            转换为HashMap
+//            ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
+//            int columnCount = md.getColumnCount();//得到数据集的列数
+//
+//            HashMap rowData = new HashMap();
+//
+//            while (rs.next()) {//数据集不为空
+//                for (int i = 1; i <= columnCount; i++) {
+//                    rowData.put(md.getColumnName(i), rs.getObject(i));
+//                }
+//            }
+            return result;
 
         }
         catch (SQLException e){

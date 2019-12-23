@@ -10,7 +10,7 @@ public class Jdbc_Conn {
             Class.forName("com.mysql.jdbc.Driver");
             String url = "jdbc:mysql://localhost:3306/supermarket?useSSL=false&serverTimezone=GMT&characterEncoding=UTF-8";
             String user = "root";
-            String password = "root";
+            String password = "";
             conn = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException e) {
             System.out.println("111"+e.getMessage());

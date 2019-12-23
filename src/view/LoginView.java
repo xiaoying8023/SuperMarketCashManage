@@ -54,7 +54,7 @@ public class LoginView {
                 SwingUtilities.invokeLater((new Runnable() {
                     @Override
                     public void run() {
-                    new RegisterView().init(mainFrame);
+                    new RegisterView().init();
                     }
                 }));
             }
@@ -108,7 +108,7 @@ public class LoginView {
                                 HashMap result = user.selectUser(jobnum,pwd);
                                 if (result != null){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
-//                                    new MenuView().init(mainFrame);
+                                    new MenuView().init();
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
