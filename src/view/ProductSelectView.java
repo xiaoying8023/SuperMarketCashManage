@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class ProductSelectView {
     //信息查询界面
-    public void init(){
+    public static void init(){
         JFrame registerFrame = new JFrame("商品信息查询");
         JLabel message = new JLabel("请输入商品名称...");
         JLabel label = new JLabel("商品信息：");
@@ -93,6 +93,10 @@ public class ProductSelectView {
 
 
 
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ProductSelectView::init);
     }
 
 }

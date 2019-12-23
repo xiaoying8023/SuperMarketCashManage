@@ -102,16 +102,16 @@ public class LoginView {
                     public void run() {
                         String jobnum = jobNumber.getText();
                         String pwd = String.valueOf(password.getPassword());
-                        if (jobnum != null && pwd != null){
+                        if (!(jobnum.equals("") && pwd.equals(""))){
                             UserDao user = new UserDao();
                             try {
                                 HashMap result = user.selectUser(jobnum,pwd);
-                                if (result != null){
+                                System.out.print(result.get("u_name"));
+                                if (result!=null) {
+                                    JOptionPane.showMessageDialog(null,"用户名或密码错误！");
+                                } else {
                                     JOptionPane.showMessageDialog(null,"登录成功！");
                                     new MenuView().init();
-                                }
-                                else{
-                                    JOptionPane.showMessageDialog(null,"用户名或密码错误！");
                                 }
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
