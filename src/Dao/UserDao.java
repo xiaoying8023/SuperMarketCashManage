@@ -13,8 +13,9 @@ public class UserDao extends JDBC.Jdbc_Conn{
     PreparedStatement pt = null;
 
     //根据用户查询信息
-    public ArrayList selectUser(String jobNum, String pwd) throws SQLException {
+    public HashMap selectUser(String jobNum, String pwd) throws SQLException {
 
+        jdbc();
         try {
             //将查询结果放入ResultSet
             String sql = "SELECT * FROM user WHERE u_id = ? AND u_password = ?";
@@ -23,24 +24,19 @@ public class UserDao extends JDBC.Jdbc_Conn{
             pt.setString(2,pwd);
             rs = pt.executeQuery();
 
-//            String sql = "SELECT * FROM user WHERE u_id = '" + jobNum + "' AND u_password = '" + pwd + "'";
-//            stmt = conn.createStatement();
-//            rs = stmt.executeQuery(sql);
-
-            //将ResultSet的结果集转存为list返回
-            ArrayList lists = new ArrayList();
+            //将ResultSet的结果集转存为HashMap返回
             ResultSetMetaData md = (ResultSetMetaData) rs.getMetaData();
             int columnCount = md.getColumnCount();//得到数据集的列数
+            HashMap rowData = new HashMap();
 
             while (rs.next()) {//数据集不为空
-                HashMap rowData = new HashMap();
+
                 for (int i = 1; i <= columnCount; i++) {
                     rowData.put(md.getColumnName(i), rs.getObject(i));
                 }
-                lists.add(rowData);
             }
 
-            return lists;
+            return rowData;
         }
         catch (SQLException e){
             System.out.println("222"+e.getMessage());
@@ -63,6 +59,7 @@ public class UserDao extends JDBC.Jdbc_Conn{
     //新建用户
     public int insertUser(String no,String name,String pwd) throws SQLException{
 
+        jdbc();
         try {
             String insert_sql = "INSERT INTO user (u_id,u_name,u_password) VALUES (?,?,?)";
             pt = conn.prepareStatement(insert_sql);

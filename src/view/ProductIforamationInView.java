@@ -1,9 +1,17 @@
 package view;
 
+import Dao.GoodsDao;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.HashMap;
 
 public class ProductIforamationInView {
     //商品信息录入模块界面
@@ -72,7 +80,36 @@ public class ProductIforamationInView {
                         String name_text = name.getText();
                         String price_text = price.getText();
                         String stock_text = stock.getText();
-                        String date_text = date.getText();
+                        LocalDate date = LocalDate.now();
+
+                        //数据类型转换
+                        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                        String time = date.format(fmt);
+
+                        if (true/*id_text != null && name_text != null && price_text != null && stock_text != null*/){
+                            GoodsDao good = new GoodsDao();
+                            try {
+                                HashMap selectResult = good.selectProduct(name_text);
+                                //如果商品存在，更新现有商品信息；如果商品不存在，添加新的商品信息
+                                if (selectResult != null){
+                                    int result = good.updateProduct(price_text,stock_text,time);
+                                }
+                                else{
+                                    int result = good.insertProduct(id_text,name_text,price_text,stock_text,time);
+                                }
+
+                                System.out.println(selectResult);
+
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+
+                        }
+                        else {
+                            JOptionPane.showMessageDialog(null,"输入信息不能为空！");
+                        }
+
+                        System.out.println(date);
 
 
                     }

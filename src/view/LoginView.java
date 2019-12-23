@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LoginView {
     //超市收银系统主界面————登录界面
@@ -18,7 +19,7 @@ public class LoginView {
         JButton login = new JButton("登录");
         JLabel register = new JLabel("注册?");
         JLabel findPassward = new JLabel("修改密码");
-        JTextField jobNumber = new JTextField("123456",20);
+        JTextField jobNumber = new JTextField(20);
         JPasswordField password = new JPasswordField(20);
         JLabel jobNumber_l = new JLabel("工号:");
         JLabel passward_l = new JLabel("密码：");
@@ -104,10 +105,10 @@ public class LoginView {
                         if (jobnum != null && pwd != null){
                             UserDao user = new UserDao();
                             try {
-                                ArrayList lists = user.selectUser(jobnum,pwd);
-                                if (lists.size()!=0){
+                                HashMap result = user.selectUser(jobnum,pwd);
+                                if (result != null){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
-                                    new MenuView().init(mainFrame);
+//                                    new MenuView().init(mainFrame);
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
@@ -136,4 +137,7 @@ public class LoginView {
         });
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(LoginView::new);
+    }
 }
