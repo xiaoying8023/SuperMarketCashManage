@@ -1,6 +1,7 @@
 package view;
 
 import Dao.GoodsDao;
+import Util.SwingUtil;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +47,9 @@ public class ProductSelectView {
         JScrollPane jScrollPane = new JScrollPane(table);
         jScrollPane.setBounds(40,130,400,250);
         table.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        System.out.println(table.getRowCount());
+        System.out.println(table.getValueAt(2,2));
+        System.out.println();
 
         JTextField id = new JTextField(20);
         JButton select = new JButton("查询");
@@ -101,6 +105,10 @@ public class ProductSelectView {
 
 
 
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(ProductSelectView::init);
     }
 
 }
