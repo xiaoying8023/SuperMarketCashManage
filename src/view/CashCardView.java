@@ -84,7 +84,7 @@ public class CashCardView {
                         if (!cashid.equals("")){
                             CashCardDao cc = new CashCardDao();
                             try {
-                                Object[] obj = cc.selectCashCcard(cashid);
+                                Object[] obj = cc.selectCashCard(cashid);
                                 if (obj[0] != null){
                                     tableModel.addRow(obj);
                                 }
@@ -113,31 +113,41 @@ public class CashCardView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+
                         String cashcard = (String) cashcardtable.getValueAt(cashcardtable.getSelectedRow(),0);
                         Double money = Double.parseDouble((String) cashcardtable.getValueAt(cashcardtable.getSelectedRow(),2));
 
-//                        if (!addMoney.equals("")){
-//                            Double addMoney = Double.parseDouble(addMoneyStr);
-//
-//                        }
-//                        else{
-//                            JOptionPane.showMessageDialog(null,"输入金额不能为空！");
-//                        }
+                        if (!addMoneyStr.equals("")){
+                            Double addMoney = Double.parseDouble(addMoneyStr);
+                            CashCardDao cc = new CashCardDao();
+                            try {
+                                int result = cc.updateMoney(cashcard,String.valueOf(money += addMoney));
+                                System.out.println(result);
+                                if (result != -1){
+                                    JOptionPane.showMessageDialog(null,"充值成功！");
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"充值失败！");
+                                }
 
-
-
-
-
-
-
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"输入金额不能为空！");
+                        }
                     }
                 });
             }
         });
+
         //办理按钮事件
         cashcardbuildbutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 System.out.println("办理");
+                new newCardCashView().init();
+
             }
         });
     }
