@@ -13,9 +13,10 @@ public class CashView {
     //结账管理界面
     CashView(){
         JFrame cashFrame=new JFrame();
-        cashFrame.setSize(500,520);
-        cashFrame.setLocation(400, 250);
-        cashFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        cashFrame.setSize(500,400);
+        cashFrame.setLocation(550,300);
+        cashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        cashFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         //查询面板
         JPanel panel=new JPanel();

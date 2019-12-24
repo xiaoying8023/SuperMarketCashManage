@@ -1,23 +1,25 @@
 package view;
 
+import Util.GetFilePath;
 import Util.SwingUtil;
-import com.mysql.jdbc.Util;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MenuView {
     //选择所需功能
     public void init(){
-        //frame.dispose();
         JFrame menuFrame = new JFrame("菜单");
-
+        menuFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                    new LoginView();
+            }
+        });
         //处理头像
-        ImageIcon imageIcon = new ImageIcon("F:\\SuperMarketCashManage\\src\\photo.jpg");
+        GetFilePath getFilePath = new GetFilePath();
+        String path = getFilePath.getFilePath("Util/photo.jpg");
+        ImageIcon imageIcon = new ImageIcon(path);
         Image image =imageIcon.getImage();
         SwingUtil swing = new SwingUtil();
         imageIcon=swing.createAutoAdjustIcon(image,true);
@@ -65,7 +67,7 @@ public class MenuView {
         menuFrame.setLocation(550,300);
         menuFrame.setSize(500,400);
         menuFrame.setResizable(false);
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuFrame.setVisible(true);
         in.addMouseListener(new MouseAdapter() {
             @Override
@@ -99,6 +101,7 @@ public class MenuView {
                     @Override
                     public void run() {
                         menuFrame.dispose();
+                        new CashView();
                     }
                 });
             }
@@ -110,6 +113,7 @@ public class MenuView {
                     @Override
                     public void run() {
                         menuFrame.dispose();
+                        new CashCardView().init();
 
                     }
                 });

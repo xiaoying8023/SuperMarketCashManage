@@ -26,13 +26,13 @@ public class LoginView {
         JLabel superMarket = new JLabel("超市收银管理系统");
         superMarket.setFont(new Font("宋体",Font.BOLD,20));
         superMarket.setBounds(160,100,400,20);
-        jobNumber_l.setBounds(180,210,100,20);
-        jobNumber.setBounds(230,210,100,20);
-        passward_l.setBounds(180,240,100,20);
-        password.setBounds(230,240,100,20);
-        login.setBounds(210,270,80,25);
-        register.setBounds(350,210,50,20);
-        findPassward.setBounds(340,240,100,20);
+        jobNumber_l.setBounds(150,190,100,20);
+        jobNumber.setBounds(190,190,120,20);
+        passward_l.setBounds(150,220,100,20);
+        password.setBounds(190,220,120,20);
+        login.setBounds(210,260,80,25);
+        register.setBounds(330,190,50,20);
+        findPassward.setBounds(320,220,100,20);
         JPanel center = new JPanel();
         center.setLayout(null);
         mainFrame.add(center,BorderLayout.CENTER);
@@ -77,7 +77,7 @@ public class LoginView {
                 SwingUtilities.invokeLater((new Runnable() {
                     @Override
                     public void run() {
-
+                        new FindPasswardView().init();
                     }
                 }));
             }
@@ -108,6 +108,9 @@ public class LoginView {
                                 Object[] result = user.selectUser(jobnum,pwd);
                                 if (result[0] != null){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
+                                    jobNumber.setText("");
+                                    password.setText("");
+                                    mainFrame.dispose();
                                     new MenuView().init();
                                 }
                                 else{

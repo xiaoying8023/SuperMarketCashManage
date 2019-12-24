@@ -48,10 +48,10 @@ public class RegisterView {
         panel.add(enter);
         panel.add(cancel);
         registerFrame.setResizable(false);
-        registerFrame.setSize(500,450);
+        registerFrame.setSize(500,400);
         registerFrame.setVisible(true);
-        registerFrame.setLocation(500,400);
-        registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        registerFrame.setLocation(550,300);
+        registerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -61,12 +61,14 @@ public class RegisterView {
                         String no = no_t.getText();
                         String name = name_t.getText();
                         String pwd = String.valueOf(passward.getPassword());
-                        if (name != null && pwd != null){
+                        if (!(name.equals("") && pwd.equals(""))){
                             UserDao user = new UserDao();
                             try {
                                 int res = user.insertUser(no,name,pwd);
                                 if (res>0){
                                     JOptionPane.showMessageDialog(null,"新建账户成功！");
+                                    registerFrame.dispose();
+                                    new LoginView();
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"新建账户失败！");

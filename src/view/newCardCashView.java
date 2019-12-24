@@ -35,10 +35,10 @@ public class newCardCashView {
         panel.add(enter);
         panel.add(cancel);
         newcardFrame.setResizable(false);
-        newcardFrame.setSize(500,450);
+        newcardFrame.setSize(500,400);
         newcardFrame.setVisible(true);
-        newcardFrame.setLocation(500,400);
-        newcardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        newcardFrame.setLocation(550,300);
+        newcardFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
 
