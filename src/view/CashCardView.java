@@ -27,18 +27,18 @@ public class CashCardView {
         cashcardpanel.setLayout(null);
 
         //ID标签
-        JLabel cashcardIDlable = new JLabel("购物卡ID");
-        cashcardIDlable.setFont(new Font("宋体",Font.BOLD,20));
-        cashcardIDlable.setBounds(30, 20, 100, 20);
+        JLabel cashcardIDlable = new JLabel("购物卡ID:");
+        //cashcardIDlable.setFont(new Font("宋体",Font.BOLD,20));
+        cashcardIDlable.setBounds(85, 20, 100, 20);
 
         //ID输入框
         JTextField cashcardIDtextfield = new JTextField(300);
-        cashcardIDtextfield.setFont(new Font("宋体",Font.BOLD,20));
+//        cashcardIDtextfield.setFont(new Font("宋体",Font.BOLD,20));
         cashcardIDtextfield.setBounds(150, 20, 270, 20);
 
         //查询按钮
         JButton cashcardinquirebutton = new JButton("查询");
-        cashcardinquirebutton.setBounds(480, 20, 70, 20);
+        cashcardinquirebutton.setBounds(460, 20, 70, 20);
 
         //显示框
         JTable cashcardtable = new JTable();
@@ -76,6 +76,10 @@ public class CashCardView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+
+                        if(tableModel.getRowCount() == 1)
+                            tableModel.removeRow(tableModel.getRowCount() - 1);
+
                         String cashid = cashcardIDtextfield.getText();
                         if (!cashid.equals("")){
                             CashCardDao cc = new CashCardDao();

@@ -21,19 +21,19 @@ public class CashView {
         JPanel panel=new JPanel();
         JLabel productID_l=new JLabel("商品号:");
         JTextField productID = new JTextField(10);
-        productID.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         JTable productTable = new JTable();
-        Object[] columnName = {"ID","数量","单价"};
+        Object[] columnName = {"ID","名称","单价","数量","是否选中"};
         DefaultTableModel tableModel = (DefaultTableModel) productTable.getModel();
         for (int i=0;i<columnName.length;i++){
             tableModel.addColumn(columnName[i]);
-        }
+        }Object[] data = {"1","1","1","1"};
+        tableModel.addRow(data);
         JCheckBox box = new JCheckBox();
-        productTable.getColumnModel().getColumn(0).setCellRenderer(new TableCellRenderer() {
+        productTable.getColumnModel().getColumn(3).setCellRenderer(new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable jTable, Object o, boolean b, boolean b1, int i, int i1) {
-
+                box.setHorizontalAlignment((int)0.5);
+                box.setSelected(false);
                 return box;
             }
         });
@@ -47,7 +47,6 @@ public class CashView {
         panel.add(jScrollPane);
         cashFrame.add(panel,BorderLayout.PAGE_START);//将查询面板添加到就frame上面
         JTextArea jTextArea=new JTextArea(5,20);
-
 
         JPanel jPane2=new JPanel();//结账面板
         JButton jButton2=new JButton("结账");//结账按钮

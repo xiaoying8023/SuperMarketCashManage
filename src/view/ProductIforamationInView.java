@@ -129,7 +129,8 @@ public class ProductIforamationInView {
                     @Override
                     public void run() {
                         //返回按钮点击事件
-                        new MenuView();
+                        registerFrame.dispose();
+                        new MenuView().init();
                     }
                 });
             }
