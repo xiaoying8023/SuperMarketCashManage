@@ -61,7 +61,7 @@ public class RegisterView {
                         String no = no_t.getText();
                         String name = name_t.getText();
                         String pwd = String.valueOf(passward.getPassword());
-                        if (name != null && pwd != null){
+                        if (name.equals("") && pwd.equals("")){
                             UserDao user = new UserDao();
                             try {
                                 int res = user.insertUser(no,name,pwd);

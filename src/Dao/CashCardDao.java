@@ -12,7 +12,8 @@ public class CashCardDao extends Jdbc_Conn {
     ResultSet rs = null;
     PreparedStatement pt = null;
 
-    public Object[] selectCashCcard(String cashId) throws SQLException {
+    //查询购物卡信息
+    public Object[] selectCashCard(String cashId) throws SQLException {
         jdbc();
         try {
             String selectCashCard_sql = "SELECT * from shopcard WHERE s_card = ?";
@@ -23,6 +24,7 @@ public class CashCardDao extends Jdbc_Conn {
 
             //将查询结果转换为Object数组
             Object[] result  = new Object[3];
+
             while (rs.next()){
 
                 result[0] = rs.getString("s_card");
@@ -38,6 +40,7 @@ public class CashCardDao extends Jdbc_Conn {
         }
     }
 
+    //购物卡充值
     public int updateMoney(String cashcard,String money) throws SQLException {
         jdbc();
         try {
@@ -56,5 +59,44 @@ public class CashCardDao extends Jdbc_Conn {
         }
 
 
+    }
+
+    //办理无会员卡的购物卡
+    public int insertCashCard(String card) throws SQLException {
+        jdbc();
+        try {
+            String insert_sql = "INSERT INTO shopcard (s_card,s_money) VALUES (?,?)";
+            pt = conn.prepareStatement(insert_sql);
+            pt.setString(1,card);
+            pt.setString(2,"0");
+            int result = pt.executeUpdate();
+
+            return result;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    //办理有会员卡的购物卡
+    public int insertCashCard(String card,String vipcard) throws SQLException {
+        jdbc();
+        try {
+            String insert_sql = "INSERT INTO shopcard (s_card,v_card,s_money) VALUES (?,?,?)";
+            pt = conn.prepareStatement(insert_sql);
+            pt.setString(1,card);
+            pt.setString(2,vipcard);
+            pt.setString(3,"0");
+            int result = pt.executeUpdate();
+
+            return result;
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
     }
 }
