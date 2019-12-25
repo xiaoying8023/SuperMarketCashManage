@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoginView {
+
+    public Object[] result = null;
     //超市收银系统主界面————登录界面
     public LoginView(){
         JFrame mainFrame = new JFrame("收银管理系统");
@@ -105,13 +107,13 @@ public class LoginView {
                         if (!jobnum.equals("") && !pwd.equals("")){
                             UserDao user = new UserDao();
                             try {
-                                Object[] result = user.selectUser(jobnum,pwd);
+                                result = user.selectUser(jobnum,pwd);
                                 if (result[0] != null){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
                                     jobNumber.setText("");
                                     password.setText("");
                                     mainFrame.dispose();
-                                    new MenuView().init();
+                                    new MenuView(jobnum, (String) result[1]);
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
@@ -138,9 +140,5 @@ public class LoginView {
                 login.setCursor(Cursor.getDefaultCursor());
             }
         });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginView::new);
     }
 }

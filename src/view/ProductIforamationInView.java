@@ -64,12 +64,7 @@ public class ProductIforamationInView {
         produceIforamationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         produceIforamationFrame.setLocation(550,300);
 
-        produceIforamationFrame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                new MenuView().init();
-            }
-        });
+
         enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -137,7 +132,7 @@ public class ProductIforamationInView {
                     public void run() {
                         //返回按钮点击事件
                         produceIforamationFrame.dispose();
-                        new MenuView().init();
+
                     }
                 });
             }

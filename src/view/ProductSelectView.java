@@ -68,7 +68,7 @@ public class ProductSelectView {
                         GoodsDao goodsDao = new GoodsDao();
                         try {
                             Object[] data= goodsDao.selectProduct(name);
-                            if (data[0] != null){
+                            if (data[0] !=null){
                                 //将返回的结果添加到显示表
                                 tableModel.addRow(data);
                             }
