@@ -4,20 +4,14 @@ import Dao.CardDao;
 import Dao.CashCardDao;
 import Dao.CashDao;
 import Dao.GoodsDao;
-
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-
 public class CashView{
-
 	double allMoney = 0;
-
     //结账管理界面
 	public CashView(String ID){
 		JFrame cashFrame=new JFrame();

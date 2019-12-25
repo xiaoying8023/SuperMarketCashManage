@@ -1,17 +1,13 @@
 package view;
 
 import Dao.CashCardDao;
-import Util.SwingUtil;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class CashCardView {
     //购物卡管理界面
@@ -49,7 +45,6 @@ public class CashCardView {
         for (int i=0;i<columnName.length;i++){
             tableModel.addColumn(columnName[i]);
         }
-
 
         JScrollPane jScrollPane = new JScrollPane(cashcardtable);
         jScrollPane.setBounds(20, 70, 450, 200);

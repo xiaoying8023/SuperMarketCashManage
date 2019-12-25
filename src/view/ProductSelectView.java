@@ -1,16 +1,12 @@
 package view;
 
 import Dao.GoodsDao;
-import Util.SwingUtil;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class ProductSelectView {
     //信息查询界面
@@ -84,15 +80,7 @@ public class ProductSelectView {
                 });
             }
         });
-
-
-
-
-
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductSelectView::init);
-    }
 
 }

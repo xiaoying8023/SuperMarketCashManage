@@ -1,19 +1,14 @@
 package view;
 
 import Dao.GoodsDao;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
+
 
 public class ProductIforamationInView {
     //商品信息录入模块界面
@@ -63,7 +58,6 @@ public class ProductIforamationInView {
         produceIforamationFrame.setVisible(true);
         produceIforamationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         produceIforamationFrame.setLocation(550,300);
-
 
         enter.addMouseListener(new MouseAdapter() {
             @Override
@@ -137,9 +131,5 @@ public class ProductIforamationInView {
                 });
             }
         });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductIforamationInView::init);
     }
 }
