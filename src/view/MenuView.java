@@ -1,23 +1,38 @@
 package view;
 
+import Util.GetFilePath;
 import Util.SwingUtil;
-import com.mysql.jdbc.Util;
-
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 
 public class MenuView {
     //选择所需功能
-    public void init(){
-        //frame.dispose();
-        JFrame menuFrame = new JFrame("菜单");
 
+    private Object[] userResult = null;
+
+    public MenuView(){
+    }
+
+    public MenuView(Object[] user){
+        this.userResult = user;
+        for (int i = 0;i < userResult.length;i++){
+            System.out.println(userResult[i]);
+        }
+    }
+
+    public void init(){
+        JFrame menuFrame = new JFrame("菜单");
+        menuFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                    new LoginView();
+            }
+        });
         //处理头像
-        ImageIcon imageIcon = new ImageIcon("F:\\SuperMarketCashManage\\src\\photo.jpg");
+        GetFilePath getFilePath = new GetFilePath();
+        String path = getFilePath.getFilePath("photo.jpg");
+        ImageIcon imageIcon = new ImageIcon(path);
         Image image =imageIcon.getImage();
         SwingUtil swing = new SwingUtil();
         imageIcon=swing.createAutoAdjustIcon(image,true);
@@ -27,7 +42,7 @@ public class MenuView {
 
 
 
-        JTextArea user = new JTextArea("\n工号：\n\n姓名：\n",5,20);
+        JTextArea user = new JTextArea("\n工号："+userResult[0]+"\n\n姓名："+userResult[1]+"\n",5,20);
         user.setFont(new Font("宋体",Font.BOLD,20));
         user.setEditable(false);
         user.setBackground(Color.GRAY);
@@ -65,7 +80,7 @@ public class MenuView {
         menuFrame.setLocation(550,300);
         menuFrame.setSize(500,400);
         menuFrame.setResizable(false);
-        menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        menuFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuFrame.setVisible(true);
         in.addMouseListener(new MouseAdapter() {
             @Override
@@ -73,7 +88,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        menuFrame.dispose();
+//                        menuFrame.setState(Frame.ICONIFIED);
                        new ProductIforamationInView().init();
 
                     }
@@ -86,7 +101,7 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        menuFrame.dispose();
+//                        menuFrame.setState(Frame.ICONIFIED);
                         new ProductSelectView().init();
                     }
                 });
@@ -98,7 +113,8 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        menuFrame.dispose();
+//                        menuFrame.setState(Frame.ICONIFIED);
+                        new CashView();
                     }
                 });
             }
@@ -109,7 +125,8 @@ public class MenuView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        menuFrame.dispose();
+//                        menuFrame.setState(Frame.ICONIFIED);
+                        new CashCardView().init();
 
                     }
                 });

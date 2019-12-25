@@ -14,7 +14,6 @@ public class UserDao extends JDBC.Jdbc_Conn{
 
     //根据用户查询信息
     public Object[] selectUser(String jobNum, String pwd) throws SQLException {
-
         jdbc();
         try {
             //将查询结果放入ResultSet
@@ -88,6 +87,40 @@ public class UserDao extends JDBC.Jdbc_Conn{
         catch (SQLException e){
             System.out.println("222"+e.getMessage());
             return -100;
+        }
+        finally {
+
+            if (rs != null){
+                rs.close();
+            }
+            if (pt != null){
+                pt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        }
+    }
+
+    //修改密码
+    public int updateUser(String no,String newPwd) throws SQLException {
+        jdbc();
+        try {
+
+            String select_sql = "UPDATE user SET u_password = ? WHERE u_id = ? ";
+            pt = conn.prepareStatement(select_sql);
+            pt.setString(1, newPwd);
+            pt.setString(2, no);
+
+            int result = pt.executeUpdate();
+
+            return result;
+
+
+        }
+        catch (SQLException e){
+            System.out.println("222"+e.getMessage());
+            return -1;
         }
         finally {
 

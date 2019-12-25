@@ -13,13 +13,13 @@ import javax.swing.table.TableModel;
 
 public class CashCardView {
     //购物卡管理界面
-    public static void init() {
+    public void init() {
         //购物卡窗口
         JFrame cashcardwindow = new JFrame("CashCardWindow");
         cashcardwindow.setVisible(true);
-        cashcardwindow.setSize(600, 400);
-        cashcardwindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        cashcardwindow.setLocation(600, 300);
+        cashcardwindow.setSize(500,400);
+        cashcardwindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        cashcardwindow.setLocation(550,300);
         cashcardwindow.setResizable(false);
 
         //购物卡面板
@@ -27,18 +27,18 @@ public class CashCardView {
         cashcardpanel.setLayout(null);
 
         //ID标签
-        JLabel cashcardIDlable = new JLabel("购物卡ID");
-        cashcardIDlable.setFont(new Font("宋体",Font.BOLD,20));
-        cashcardIDlable.setBounds(30, 20, 100, 20);
+        JLabel cashcardIDlable = new JLabel("购物卡ID:");
+        //cashcardIDlable.setFont(new Font("宋体",Font.BOLD,20));
+        cashcardIDlable.setBounds(40, 20, 100, 20);
 
         //ID输入框
         JTextField cashcardIDtextfield = new JTextField(300);
-        cashcardIDtextfield.setFont(new Font("宋体",Font.BOLD,20));
-        cashcardIDtextfield.setBounds(150, 20, 270, 20);
+//        cashcardIDtextfield.setFont(new Font("宋体",Font.BOLD,20));
+        cashcardIDtextfield.setBounds(110, 20, 270, 20);
 
         //查询按钮
         JButton cashcardinquirebutton = new JButton("查询");
-        cashcardinquirebutton.setBounds(480, 20, 70, 20);
+        cashcardinquirebutton.setBounds(390, 20, 65, 22);
 
         //显示框
         JTable cashcardtable = new JTable();
@@ -50,16 +50,16 @@ public class CashCardView {
 
 
         JScrollPane jScrollPane = new JScrollPane(cashcardtable);
-        jScrollPane.setBounds(40, 70, 500, 200);
+        jScrollPane.setBounds(20, 70, 450, 200);
         cashcardtable.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         //充值按钮
         JButton cashcardrechargebutton = new JButton("充值");
-        cashcardrechargebutton.setBounds(150, 300, 60, 30);
+        cashcardrechargebutton.setBounds(100, 300, 60, 30);
 
         //办理按钮
         JButton cashcardbuildbutton = new JButton("办理");
-        cashcardbuildbutton.setBounds(400, 300, 60, 30);
+        cashcardbuildbutton.setBounds(350, 300, 60, 30);
 
         //集成控件
         cashcardwindow.add(cashcardpanel);
@@ -76,6 +76,10 @@ public class CashCardView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
+
+                        if(tableModel.getRowCount() == 1)
+                            tableModel.removeRow(tableModel.getRowCount() - 1);
+
                         String cashid = cashcardIDtextfield.getText();
                         if (!cashid.equals("")){
                             CashCardDao cc = new CashCardDao();
@@ -141,16 +145,12 @@ public class CashCardView {
         //办理按钮事件
         cashcardbuildbutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("办理");
                 new newCardCashView().init();
 
             }
         });
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(CashCardView::init);
-    }
 
 }
 

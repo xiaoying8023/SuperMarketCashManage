@@ -1,13 +1,16 @@
 package view;
 
+import Dao.UserDao;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 
 public class FindPasswardView {
     //修改密码界面
-    public static void init(){
+    public void init(){
         JFrame passwardFrame = new JFrame("收银员账号密码修改");
         JLabel message = new JLabel("请输入信息...");
         JLabel no_l = new JLabel("工号:");
@@ -49,21 +52,52 @@ public class FindPasswardView {
         panel.add(enter);
         panel.add(cancel);
         passwardFrame.setResizable(false);
-        passwardFrame.setSize(500,450);
+        passwardFrame.setSize(500,400);
         passwardFrame.setVisible(true);
-        passwardFrame.setLocation(500,400);
-        passwardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        passwardFrame.setLocation(550,300);
+        passwardFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        //确定按钮点击事件
         enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        //确定按钮点击事件
+                        String no = no_t.getText();
+                        String name = name_t.getText();
+                        String password_old = String.valueOf(passward_old.getPassword());
+                        String password_new = String.valueOf(passward_new.getPassword());
+
+                        if (!no.equals("") && !name.equals("") && !passward_old.equals("") && !passward_new.equals("")){
+                            UserDao ud = new UserDao() ;
+                            try {
+                                Object[] selectResult = ud.selectUser(no,password_old);
+                                if (selectResult[0] != null && name.equals(selectResult[1])){
+                                    int updateResult = ud.updateUser(no,password_new);
+                                    if (updateResult == 1){
+                                        JOptionPane.showMessageDialog(null,"密码修改成功！");
+                                    }
+                                    else {
+                                        JOptionPane.showMessageDialog(null,"密码修改失败！");
+                                    }
+                                }
+                                else{
+                                    JOptionPane.showMessageDialog(null,"原信息有误！");
+                                }
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                            }
+                        }
+                        else{
+                            JOptionPane.showMessageDialog(null,"输入信息不能为空！");
+                        }
                     }
                 });
             }
         });
+
+
         cancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
