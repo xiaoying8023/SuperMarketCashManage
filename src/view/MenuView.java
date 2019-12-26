@@ -66,6 +66,12 @@ public class MenuView {
         menuFrame.setResizable(false);
         menuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         menuFrame.setVisible(true);
+        menuFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
         in.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
