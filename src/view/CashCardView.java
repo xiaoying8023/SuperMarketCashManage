@@ -142,7 +142,6 @@ public class CashCardView {
         //办理按钮事件
         cashcardbuildbutton.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println("办理");
                 new newCardCashView().init();
 
             }
