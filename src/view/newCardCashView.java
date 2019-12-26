@@ -2,8 +2,6 @@ package view;
 
 import Dao.CardDao;
 import Dao.CashCardDao;
-import Util.SwingUtil;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;

@@ -19,20 +19,14 @@ public class CashCardDao extends Jdbc_Conn {
             String selectCashCard_sql = "SELECT * from shopcard WHERE s_card = ?";
             pt = conn.prepareStatement(selectCashCard_sql);
             pt.setString(1,cashId);
-
             rs = pt.executeQuery();
-
             //将查询结果转换为Object数组
             Object[] result  = new Object[3];
-
             while (rs.next()){
-
                 result[0] = rs.getString("s_card");
                 result[1] = rs.getString("v_card");
                 result[2] = rs.getString("s_money");
-
             }
-
             return result;
         } catch (SQLException e) {
             e.printStackTrace();

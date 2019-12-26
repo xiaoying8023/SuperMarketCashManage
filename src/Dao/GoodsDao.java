@@ -64,6 +64,48 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
             }
         }
     }
+    public Object[] selectProductID(String id) throws SQLException {
+
+        jdbc();
+        try {
+
+            String select_sql = "SELECT * FROM product WHERE p_id = ?";
+            pt = conn.prepareStatement(select_sql);
+            pt.setString(1,id);
+
+            rs = pt.executeQuery();
+
+
+            //将查询结果转换为Object数组
+            Object[] result  = new Object[5];
+            while (rs.next()){
+
+                result[0] = rs.getString("p_id");
+                result[1] = rs.getString("p_name");
+                result[2] = rs.getString("p_price");
+                result[3] = rs.getString("p_stock");
+                result[4] = rs.getString("p_gettime");
+            }
+            return result;
+
+        }
+        catch (SQLException e){
+            System.out.println("222"+e.getMessage());
+            return null;
+        }
+        finally {
+
+            if (rs != null){
+                rs.close();
+            }
+            if (pt != null){
+                pt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        }
+    }
 
     //商品信息更新
     public int updateProduct(String name,String price,String stock,String time) throws SQLException {
@@ -101,6 +143,41 @@ public class GoodsDao extends JDBC.Jdbc_Conn{
             }
         }
     }
+    //商品信息更新
+    public int updateProduct(String id,String stock) throws SQLException {
+
+        jdbc();
+        try {
+
+            String select_sql = "UPDATE product SET p_stock = ?WHERE p_id = ?";
+            pt = conn.prepareStatement(select_sql);
+            pt.setString(1, stock);
+            pt.setString(2,id);
+
+            int result = pt.executeUpdate();
+
+            return result;
+
+
+        }
+        catch (SQLException e){
+            System.out.println("222"+e.getMessage());
+            return -1;
+        }
+        finally {
+
+            if (rs != null){
+                rs.close();
+            }
+            if (pt != null){
+                pt.close();
+            }
+            if (conn != null){
+                conn.close();
+            }
+        }
+    }
+
 
     //新商品信息插入
     public int insertProduct(String id,String name,String price,String stock,String time) throws SQLException {

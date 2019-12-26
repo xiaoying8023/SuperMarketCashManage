@@ -50,8 +50,8 @@ public class RegisterView {
         registerFrame.setResizable(false);
         registerFrame.setSize(500,450);
         registerFrame.setVisible(true);
-        registerFrame.setLocation(500,400);
-        registerFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        registerFrame.setLocation(550,300);
+        registerFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -89,7 +89,7 @@ public class RegisterView {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-
+                        new LoginView();
                     }
                 });
             }

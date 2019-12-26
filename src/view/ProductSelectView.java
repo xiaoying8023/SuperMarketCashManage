@@ -1,20 +1,15 @@
 package view;
 
 import Dao.GoodsDao;
-import Util.SwingUtil;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class ProductSelectView {
-
-
+    //信息查询界面
     public static void init(){
         JFrame productFrame = new JFrame("商品信息查询");
         JLabel message = new JLabel("请输入商品名称...");
@@ -69,11 +64,7 @@ public class ProductSelectView {
                         GoodsDao goodsDao = new GoodsDao();
                         try {
                             Object[] data= goodsDao.selectProduct(name);
-                            System.out.println(name);
-                            for (int i = 0;i < data.length;i++){
-                                System.out.println(data[i]);
-                            }
-                            if (data[0] != null){
+                            if (data[0] !=null){
                                 //将返回的结果添加到显示表
                                 tableModel.addRow(data);
                             }
@@ -89,15 +80,7 @@ public class ProductSelectView {
                 });
             }
         });
-
-
-
-
-
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductSelectView::init);
-    }
 
 }
