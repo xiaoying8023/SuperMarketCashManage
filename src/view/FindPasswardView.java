@@ -1,12 +1,9 @@
 package view;
 
-import Dao.UserDao;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.SQLException;
 
 public class FindPasswardView {
     //修改密码界面
@@ -56,48 +53,17 @@ public class FindPasswardView {
         passwardFrame.setVisible(true);
         passwardFrame.setLocation(550,300);
         passwardFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        //确定按钮点击事件
         enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        String no = no_t.getText();
-                        String name = name_t.getText();
-                        String password_old = String.valueOf(passward_old.getPassword());
-                        String password_new = String.valueOf(passward_new.getPassword());
-
-                        if (!no.equals("") && !name.equals("") && !passward_old.equals("") && !passward_new.equals("")){
-                            UserDao ud = new UserDao() ;
-                            try {
-                                Object[] selectResult = ud.selectUser(no,password_old);
-                                if (selectResult[0] != null && name.equals(selectResult[1])){
-                                    int updateResult = ud.updateUser(no,password_new);
-                                    if (updateResult == 1){
-                                        JOptionPane.showMessageDialog(null,"密码修改成功！");
-                                    }
-                                    else {
-                                        JOptionPane.showMessageDialog(null,"密码修改失败！");
-                                    }
-                                }
-                                else{
-                                    JOptionPane.showMessageDialog(null,"原信息有误！");
-                                }
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                            }
-                        }
-                        else{
-                            JOptionPane.showMessageDialog(null,"输入信息不能为空！");
-                        }
+                        //确定按钮点击事件
                     }
                 });
             }
         });
-
-
         cancel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
