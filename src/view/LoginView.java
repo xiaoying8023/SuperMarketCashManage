@@ -1,12 +1,16 @@
 package view;
 
+<<<<<<< Updated upstream:src/view/LoginView.java
 import Dao.UserDao;
+=======
+>>>>>>> Stashed changes:src/view/loginView.java
 import javafx.beans.binding.ObjectBinding;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+<<<<<<< Updated upstream:src/view/LoginView.java
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
@@ -15,6 +19,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoginView {
+=======
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+>>>>>>> Stashed changes:src/view/loginView.java
 
     public Object[] result = null;
     //超市收银系统主界面————登录界面
@@ -23,13 +32,18 @@ public class LoginView {
         JButton login = new JButton("登录");
         JLabel register = new JLabel("注册?");
         JLabel findPassward = new JLabel("修改密码");
+<<<<<<< Updated upstream:src/view/LoginView.java
         JTextField jobNumber = new JTextField(20);
+=======
+        JTextField jobNumber = new JTextField("123456",20);
+>>>>>>> Stashed changes:src/view/loginView.java
         JPasswordField password = new JPasswordField(20);
         JLabel jobNumber_l = new JLabel("工号:");
         JLabel passward_l = new JLabel("密码：");
         JLabel superMarket = new JLabel("超市收银管理系统");
         superMarket.setFont(new Font("宋体",Font.BOLD,20));
         superMarket.setBounds(160,100,400,20);
+<<<<<<< Updated upstream:src/view/LoginView.java
         jobNumber_l.setBounds(150,190,100,20);
         jobNumber.setBounds(190,190,120,20);
         passward_l.setBounds(150,220,100,20);
@@ -37,6 +51,15 @@ public class LoginView {
         login.setBounds(210,260,80,25);
         register.setBounds(330,190,50,20);
         findPassward.setBounds(320,220,100,20);
+=======
+        jobNumber_l.setBounds(180,210,100,20);
+        jobNumber.setBounds(230,210,100,20);
+        passward_l.setBounds(180,240,100,20);
+        password.setBounds(230,240,100,20);
+        login.setBounds(210,270,80,25);
+        register.setBounds(350,210,50,20);
+        findPassward.setBounds(340,240,100,20);
+>>>>>>> Stashed changes:src/view/loginView.java
         JPanel center = new JPanel();
         center.setLayout(null);
         mainFrame.add(center,BorderLayout.CENTER);
@@ -112,6 +135,7 @@ public class LoginView {
                     public void run() {
                         String jobnum = jobNumber.getText();
                         String pwd = String.valueOf(password.getPassword());
+<<<<<<< Updated upstream:src/view/LoginView.java
                         if (!jobnum.equals("") && !pwd.equals("")){
                             UserDao user = new UserDao();
                             try {
@@ -122,6 +146,14 @@ public class LoginView {
                                     password.setText("");
                                     mainFrame.dispose();
                                     new MenuView(jobnum, (String) result[1]);
+=======
+                        if (jobnum != null || pwd != null){
+                            JDBC.jdbc jdbc = new JDBC.jdbc();
+                            try {
+                                ArrayList lists = jdbc.selectuser(jobnum,pwd);
+                                if (lists.size()!=0){
+                                    JOptionPane.showMessageDialog(null,"登录成功！");
+>>>>>>> Stashed changes:src/view/loginView.java
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
