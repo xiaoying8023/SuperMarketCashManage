@@ -7,12 +7,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LoginView {
+
+    public Object[] result = null;
     //超市收银系统主界面————登录界面
     public LoginView(){
         JFrame mainFrame = new JFrame("收银管理系统");
@@ -26,13 +30,13 @@ public class LoginView {
         JLabel superMarket = new JLabel("超市收银管理系统");
         superMarket.setFont(new Font("宋体",Font.BOLD,20));
         superMarket.setBounds(160,100,400,20);
-        jobNumber_l.setBounds(180,210,100,20);
-        jobNumber.setBounds(230,210,100,20);
-        passward_l.setBounds(180,240,100,20);
-        password.setBounds(230,240,100,20);
-        login.setBounds(210,270,80,25);
-        register.setBounds(350,210,50,20);
-        findPassward.setBounds(340,240,100,20);
+        jobNumber_l.setBounds(150,190,100,20);
+        jobNumber.setBounds(190,190,120,20);
+        passward_l.setBounds(150,220,100,20);
+        password.setBounds(190,220,120,20);
+        login.setBounds(210,260,80,25);
+        register.setBounds(330,190,50,20);
+        findPassward.setBounds(320,220,100,20);
         JPanel center = new JPanel();
         center.setLayout(null);
         mainFrame.add(center,BorderLayout.CENTER);
@@ -48,6 +52,12 @@ public class LoginView {
         mainFrame.setSize(500,400);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setVisible(true);
+        mainFrame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0);
+            }
+        });
         register.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -77,7 +87,7 @@ public class LoginView {
                 SwingUtilities.invokeLater((new Runnable() {
                     @Override
                     public void run() {
-
+                        new FindPasswardView().init();
                     }
                 }));
             }
@@ -105,10 +115,13 @@ public class LoginView {
                         if (!jobnum.equals("") && !pwd.equals("")){
                             UserDao user = new UserDao();
                             try {
-                                Object[] result = user.selectUser(jobnum,pwd);
+                                result = user.selectUser(jobnum,pwd);
                                 if (result[0] != null){
                                     JOptionPane.showMessageDialog(null,"登录成功！");
-                                    new MenuView().init();
+                                    jobNumber.setText("");
+                                    password.setText("");
+                                    mainFrame.dispose();
+                                    new MenuView(jobnum, (String) result[1]);
                                 }
                                 else{
                                     JOptionPane.showMessageDialog(null,"用户名或密码错误！");
@@ -135,9 +148,5 @@ public class LoginView {
                 login.setCursor(Cursor.getDefaultCursor());
             }
         });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginView::new);
     }
 }

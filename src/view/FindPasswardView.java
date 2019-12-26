@@ -7,7 +7,7 @@ import java.awt.event.MouseEvent;
 
 public class FindPasswardView {
     //修改密码界面
-    public static void init(){
+    public void init(){
         JFrame passwardFrame = new JFrame("收银员账号密码修改");
         JLabel message = new JLabel("请输入信息...");
         JLabel no_l = new JLabel("工号:");
@@ -49,10 +49,10 @@ public class FindPasswardView {
         panel.add(enter);
         panel.add(cancel);
         passwardFrame.setResizable(false);
-        passwardFrame.setSize(500,450);
+        passwardFrame.setSize(500,400);
         passwardFrame.setVisible(true);
-        passwardFrame.setLocation(500,400);
-        passwardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        passwardFrame.setLocation(550,300);
+        passwardFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         enter.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

@@ -1,23 +1,19 @@
 package view;
 
 import Dao.GoodsDao;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.HashMap;
+
 
 public class ProductIforamationInView {
     //商品信息录入模块界面
     public static void init(){
-//        frame.dispose();
-        JFrame registerFrame = new JFrame("商品信息录入");
+        JFrame produceIforamationFrame = new JFrame("商品信息录入");
         JLabel message = new JLabel("请输入商品信息...");
         JLabel id_l = new JLabel("id:");
         JLabel name_l = new JLabel("商品名称:");
@@ -45,7 +41,7 @@ public class ProductIforamationInView {
         //添加控件
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        registerFrame.add(panel);
+        produceIforamationFrame.add(panel);
         panel.add(message);
         panel.add(id_l);
         panel.add(id);
@@ -57,11 +53,11 @@ public class ProductIforamationInView {
         panel.add(stock);
         panel.add(enter);
         panel.add(cancel);
-        registerFrame.setResizable(false);
-        registerFrame.setSize(500,450);
-        registerFrame.setVisible(true);
-        registerFrame.setLocation(500,400);
-
+        produceIforamationFrame.setResizable(false);
+        produceIforamationFrame.setSize(500,400);
+        produceIforamationFrame.setVisible(true);
+        produceIforamationFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        produceIforamationFrame.setLocation(550,300);
 
         enter.addMouseListener(new MouseAdapter() {
             @Override
@@ -129,14 +125,11 @@ public class ProductIforamationInView {
                     @Override
                     public void run() {
                         //返回按钮点击事件
-                        new MenuView();
+                        produceIforamationFrame.dispose();
+
                     }
                 });
             }
         });
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(ProductIforamationInView::init);
     }
 }

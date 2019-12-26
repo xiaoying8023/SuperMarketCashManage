@@ -1,25 +1,19 @@
 package view;
 
 import Dao.GoodsDao;
-import Util.SwingUtil;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class ProductSelectView {
     //信息查询界面
     public static void init(){
-        JFrame registerFrame = new JFrame("商品信息查询");
+        JFrame productFrame = new JFrame("商品信息查询");
         JLabel message = new JLabel("请输入商品名称...");
         JLabel label = new JLabel("商品信息：");
-        JLabel selectMessage = new JLabel();
-
         JTable table=new JTable();
         DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
         tableModel.addColumn("ID");
@@ -28,9 +22,8 @@ public class ProductSelectView {
         tableModel.addColumn("库存");
         tableModel.addColumn("入库时间");
         JScrollPane jScrollPane = new JScrollPane(table);
-        jScrollPane.setBounds(40,130,400,250);
+        jScrollPane.setBounds(40,130,400,220);
         table.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-
         JTextField id = new JTextField(20);
         JButton select = new JButton("查询");
         label.setFont(new Font("宋体",Font.BOLD,15));
@@ -39,20 +32,19 @@ public class ProductSelectView {
         id.setBounds(40,60,400,25);
         select.setBounds(370,90,60,20);
         label.setBounds(10,110,90,20);
-        selectMessage.setBounds(40,130,400,250);
-        selectMessage.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        registerFrame.add(panel);
+        productFrame.add(panel);
         panel.add(message);
         panel.add(id);
         panel.add(select);
         panel.add(label);
         panel.add(jScrollPane);
-        registerFrame.setResizable(false);
-        registerFrame.setSize(500,450);
-        registerFrame.setVisible(true);
-        registerFrame.setLocation(500,400);
+        productFrame.setResizable(false);
+        productFrame.setSize(500,400);
+        productFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        productFrame.setVisible(true);
+        productFrame.setLocation(550,300);
         id.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -72,7 +64,7 @@ public class ProductSelectView {
                         GoodsDao goodsDao = new GoodsDao();
                         try {
                             Object[] data= goodsDao.selectProduct(name);
-                            if (data[0] != null){
+                            if (data[0] !=null){
                                 //将返回的结果添加到显示表
                                 tableModel.addRow(data);
                             }
@@ -88,11 +80,7 @@ public class ProductSelectView {
                 });
             }
         });
-
-
-
-
-
     }
+
 
 }
